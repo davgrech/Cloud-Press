@@ -30,11 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.txtFileName = new System.Windows.Forms.TextBox();
+            this.btnFile = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.button2 = new System.Windows.Forms.Button();
+            this.txtFolder = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -44,6 +43,10 @@
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.label4 = new System.Windows.Forms.Label();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.btnFolder = new System.Windows.Forms.Button();
+            this.Cancel = new System.Windows.Forms.Button();
+            this.okBtn = new System.Windows.Forms.Button();
+            this.helpBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -56,22 +59,23 @@
             this.label1.Text = "Archive name";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
-            // textBox1
+            // txtFileName
             // 
-            this.textBox1.Location = new System.Drawing.Point(12, 79);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(327, 23);
-            this.textBox1.TabIndex = 1;
+            this.txtFileName.Location = new System.Drawing.Point(12, 79);
+            this.txtFileName.Name = "txtFileName";
+            this.txtFileName.Size = new System.Drawing.Size(327, 23);
+            this.txtFileName.TabIndex = 1;
+            this.txtFileName.TextChanged += new System.EventHandler(this.txtFileName_TextChanged);
             // 
-            // button1
+            // btnFile
             // 
-            this.button1.Location = new System.Drawing.Point(345, 79);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Browse...";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnFile.Location = new System.Drawing.Point(345, 79);
+            this.btnFile.Name = "btnFile";
+            this.btnFile.Size = new System.Drawing.Size(75, 23);
+            this.btnFile.TabIndex = 2;
+            this.btnFile.Text = "Browse...";
+            this.btnFile.UseVisualStyleBackColor = true;
+            this.btnFile.Click += new System.EventHandler(this.btnFile_Click);
             // 
             // label2
             // 
@@ -82,22 +86,13 @@
             this.label2.TabIndex = 3;
             this.label2.Text = "Folder path";
             // 
-            // textBox2
+            // txtFolder
             // 
-            this.textBox2.Location = new System.Drawing.Point(12, 133);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(327, 23);
-            this.textBox2.TabIndex = 4;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(345, 132);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 5;
-            this.button2.Text = "Browse...";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.txtFolder.Location = new System.Drawing.Point(12, 133);
+            this.txtFolder.Name = "txtFolder";
+            this.txtFolder.Size = new System.Drawing.Size(327, 23);
+            this.txtFolder.TabIndex = 4;
+            this.txtFolder.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // label3
             // 
@@ -136,12 +131,13 @@
             this.checkedListBox1.Name = "checkedListBox1";
             this.checkedListBox1.Size = new System.Drawing.Size(163, 94);
             this.checkedListBox1.TabIndex = 10;
+            this.checkedListBox1.SelectedIndexChanged += new System.EventHandler(this.checkedListBox1_SelectedIndexChanged_1);
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(242, 332);
+            this.button4.Location = new System.Drawing.Point(33, 311);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(163, 23);
+            this.button4.Size = new System.Drawing.Size(189, 23);
             this.button4.TabIndex = 12;
             this.button4.Text = "Set password...";
             this.button4.UseVisualStyleBackColor = true;
@@ -204,11 +200,52 @@
             this.comboBox2.Size = new System.Drawing.Size(189, 23);
             this.comboBox2.TabIndex = 16;
             // 
+            // btnFolder
+            // 
+            this.btnFolder.Location = new System.Drawing.Point(345, 132);
+            this.btnFolder.Name = "btnFolder";
+            this.btnFolder.Size = new System.Drawing.Size(75, 23);
+            this.btnFolder.TabIndex = 18;
+            this.btnFolder.Text = "Browse...";
+            this.btnFolder.UseVisualStyleBackColor = true;
+            this.btnFolder.Click += new System.EventHandler(this.btnFolder_Click);
+            // 
+            // Cancel
+            // 
+            this.Cancel.Location = new System.Drawing.Point(267, 359);
+            this.Cancel.Name = "Cancel";
+            this.Cancel.Size = new System.Drawing.Size(75, 23);
+            this.Cancel.TabIndex = 20;
+            this.Cancel.Text = "Cancel";
+            this.Cancel.UseVisualStyleBackColor = true;
+            // 
+            // okBtn
+            // 
+            this.okBtn.Location = new System.Drawing.Point(186, 359);
+            this.okBtn.Name = "okBtn";
+            this.okBtn.Size = new System.Drawing.Size(75, 23);
+            this.okBtn.TabIndex = 21;
+            this.okBtn.Text = "OK";
+            this.okBtn.UseVisualStyleBackColor = true;
+            // 
+            // helpBtn
+            // 
+            this.helpBtn.Location = new System.Drawing.Point(348, 359);
+            this.helpBtn.Name = "helpBtn";
+            this.helpBtn.Size = new System.Drawing.Size(75, 23);
+            this.helpBtn.TabIndex = 22;
+            this.helpBtn.Text = "Help";
+            this.helpBtn.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(435, 386);
+            this.ClientSize = new System.Drawing.Size(445, 397);
+            this.Controls.Add(this.helpBtn);
+            this.Controls.Add(this.okBtn);
+            this.Controls.Add(this.Cancel);
+            this.Controls.Add(this.btnFolder);
             this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.comboBox1);
@@ -216,11 +253,10 @@
             this.Controls.Add(this.checkedListBox1);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.txtFolder);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.btnFile);
+            this.Controls.Add(this.txtFileName);
             this.Controls.Add(this.label1);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -232,11 +268,11 @@
         #endregion
 
         private Label label1;
-        private TextBox textBox1;
-        private Button button1;
+        private TextBox txtFileName;
+        private Button btnFile;
         private Label label2;
-        private TextBox textBox2;
-        private Button button2;
+        private TextBox txtFolder;
+      
         private Label label3;
         private Label label5;
         private ContextMenuStrip contextMenuStrip1;
@@ -246,5 +282,9 @@
         private ContextMenuStrip contextMenuStrip2;
         private Label label4;
         private ComboBox comboBox2;
+        private Button btnFolder;
+        private Button Cancel;
+        private Button okBtn;
+        private Button helpBtn;
     }
 }
