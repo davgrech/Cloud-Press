@@ -1,6 +1,0 @@
-﻿  main.c
-C:\Users\123dg\Desktop\CompressionAlg-repo\ashkelon-1206-compressor\Deflate\Deflate\Deflate\main.c(25,15): warning C4013: 'encodeTest' undefined; assuming extern returning int
-C:\Users\123dg\Desktop\CompressionAlg-repo\ashkelon-1206-compressor\Deflate\Deflate\Deflate\main.c(4,9): warning C4101: 'opt': unreferenced local variable
-C:\Users\123dg\Desktop\CompressionAlg-repo\ashkelon-1206-compressor\Deflate\Deflate\Deflate\main.c(36): warning C4716: 'encodeTest': must return a value
-C:\Users\123dg\Desktop\CompressionAlg-repo\ashkelon-1206-compressor\Deflate\Deflate\Deflate\main.c(41): warning C4716: 'decodeTest': must return a value
-  Deflate.vcxproj -> C:\Users\123dg\Desktop\CompressionAlg-repo\ashkelon-1206-compressor\Deflate\Deflate\x64\Debug\Deflate.exe
