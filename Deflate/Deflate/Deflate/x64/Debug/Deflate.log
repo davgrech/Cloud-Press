@@ -1,9 +1,2 @@
 ﻿  lzss.c
-C:\Users\123dg\Desktop\CompressionAlg-repo\ashkelon-1206-compressor\Deflate\Deflate\Deflate\lzss.c(14,25): warning C4013: 'getopt' undefined; assuming extern returning int
-C:\Users\123dg\Desktop\CompressionAlg-repo\ashkelon-1206-compressor\Deflate\Deflate\Deflate\lzss.c(39,44): error C2065: 'optarg': undeclared identifier
-C:\Users\123dg\Desktop\CompressionAlg-repo\ashkelon-1206-compressor\Deflate\Deflate\Deflate\lzss.c(39,44): warning C4047: 'function': 'const char *' differs in levels of indirection from 'int'
-C:\Users\123dg\Desktop\CompressionAlg-repo\ashkelon-1206-compressor\Deflate\Deflate\Deflate\lzss.c(39,38): warning C4024: 'fopen': different types for formal and actual parameter 1
-C:\Users\123dg\Desktop\CompressionAlg-repo\ashkelon-1206-compressor\Deflate\Deflate\Deflate\lzss.c(65,45): error C2065: 'optarg': undeclared identifier
-C:\Users\123dg\Desktop\CompressionAlg-repo\ashkelon-1206-compressor\Deflate\Deflate\Deflate\lzss.c(65,45): warning C4047: 'function': 'const char *' differs in levels of indirection from 'int'
-C:\Users\123dg\Desktop\CompressionAlg-repo\ashkelon-1206-compressor\Deflate\Deflate\Deflate\lzss.c(65,39): warning C4024: 'fopen': different types for formal and actual parameter 1
-C:\Users\123dg\Desktop\CompressionAlg-repo\ashkelon-1206-compressor\Deflate\Deflate\Deflate\lzss.c(3): fatal error C1075: '{': no matching token found
+  Deflate.vcxproj -> C:\Users\123dg\Desktop\CompressionAlg-repo\ashkelon-1206-compressor\Deflate\Deflate\x64\Debug\Deflate.exe

@@ -1,90 +1,62 @@
 #include "lzss.h"
-int main(int argc, char* argv[])
+/****************************************************************************
+*   Function   : FindMatch
+*   Description: This function will search through the slidingWindow
+*                dictionary for the longest sequence matching the MAX_CODED
+*                long string stored in uncodedLookahed.
+*   Parameters : windowHead - head of sliding window
+*                uncodedHead - head of uncoded lookahead buffer
+*   Effects    : NONE
+*   Returned   : The sliding window index where the match starts and the
+*                length of the match.  If there is no match a length of
+*                zero will be returned.
+****************************************************************************/
+encoded_string_t FindMatch(int windowHead, int uncodedHead)
 {
-    int opt;
-    FILE* inFile, * outFile;  /* input & output files */
-    MODES mode;
+    encoded_string_t matchData;
+    int i, j;
 
-    /* initialize data */
-    inFile = NULL;
-    outFile = NULL;
-    mode = ENCODE;
+    matchData.length = 0;
+    i = windowHead;  /* start at the beginning of the sliding window */
+    j = 0;
 
-    /* parse command line */
-    while ((opt = getopt(argc, argv, "cdtni:o:h?")) != -1)
+    while (TRUE)
     {
-        switch (opt)
+        if (slidingWindow[i] == uncodedLookahead[uncodedHead])
         {
-        case 'c':       /* compression mode */
-            mode = ENCODE;
-            break;
+            /* we matched one how many more match? */
+            j = 1;
 
-        case 'd':       /* decompression mode */
-            mode = DECODE;
-            break;
-
-        case 'i':       /* input file name */
-            if (inFile != NULL)
+            while (slidingWindow[(i + j) % WINDOW_SIZE] ==
+                uncodedLookahead[(uncodedHead + j) % MAX_CODED]) // look for more matches
             {
-                fprintf(stderr, "Multiple input files not allowed.\n");
-                fclose(inFile);
-
-                if (outFile != NULL)
+                if (j >= MAX_CODED) // if sliding window match is longer them max code len
                 {
-                    fclose(outFile);
+                    break;
                 }
+                j++;
+            };
 
-                exit(EXIT_FAILURE);
-            }
-            else if ((inFile = fopen(optarg, "rb")) == NULL)
+            if (j > matchData.length)
             {
-                perror("Opening inFile");
-
-                if (outFile != NULL)
-                {
-                    fclose(outFile);
-                }
-
-                exit(EXIT_FAILURE);
+                matchData.length = j;
+                matchData.offset = i;
             }
+        }
+
+        if (j >= MAX_CODED)
+        {
+            matchData.length = MAX_CODED;
             break;
+        }
 
-        case 'o':       /* output file name */
-            if (outFile != NULL)
-            {
-                fprintf(stderr, "Multiple output files not allowed.\n");
-                fclose(outFile);
-
-                if (inFile != NULL)
-                {
-                    fclose(inFile);
-                }
-
-                exit(EXIT_FAILURE);
-            }
-            else if ((outFile = fopen(optarg, "wb")) == NULL)
-            {
-                perror("Opening outFile");
-
-                if (outFile != NULL)
-                {
-                    fclose(inFile);
-                }
-
-                exit(EXIT_FAILURE);
-            }
+        i = (i + 1) % WINDOW_SIZE;
+        if (i == windowHead)
+        {
+            /* we wrapped around */
             break;
-
-        case 'h':
-        case '?':
-            printf("Usage: lzss <options>\n\n");
-            printf("options:\n");
-            printf("  -c : Encode input file to output file.\n");
-            printf("  -d : Decode input file to output file.\n");
-            printf("  -i <filename> : Name of input file.\n");
-            printf("  -o <filename> : Name of output file.\n");
-            printf("  -h | ?  : Print out command line options.\n\n");
-            printf("Default: lzss -c\n");
-            return(EXIT_SUCCESS);
         }
     }
+
+    return matchData;
+}
