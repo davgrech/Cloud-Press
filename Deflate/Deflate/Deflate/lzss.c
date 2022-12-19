@@ -60,12 +60,7 @@ encoded_string_t FindMatch(int windowHead, int uncodedHead)
 /*
 * This function will read an input file and write an output
 *       file encoded using a slight modification to the LZss
-*       algorithm.  I'm not sure who to credit with the slight
-*       modification to LZss, but the modification is to group the
-*       coded/not coded flag into bytes.  By grouping the flags,
-*       the need to be able to write anything other than a byte
-*       may be avoided as longs as strings encode as a whole byte
-*       multiple.  This algorithm encodes strings as 16 bits (a 12
+*       algorithm. This algorithm encodes strings as 16 bits (a 12
 *       bit offset + a 4 bit length).
 * Input : inFile - file to encode
 *         outFile - file to write encoded output
@@ -201,5 +196,108 @@ void EncodeLZSS(FILE* inFile, FILE* outFile)
         }
     }
 }
+
+/*
+* This function will read an LZss encoded input file and
+*       write an output file. This algorithm
+*       encodes strings as 16 bits (a 12bit offset + a 4 bit length).
+*   Input : inFile - file to decode
+*                outFile - file to write decoded output
+*   Output: inFile is decoded and written to outFile
+*/
+void DecodeLZSS(FILE* inFile, FILE* outFile)
+{
+    int  i, c;
+    unsigned char flags, flagsUsed;     /* encoded/not encoded flag */
+    int nextChar;                       /* next char in sliding window */
+    encoded_string_t code;              /* offset/length code for string */
+
+    /* initialize variables */
+    flags = 0;
+    flagsUsed = 7;
+    nextChar = 0;
+
+    /*
+    * Fill the sliding window buffer with some known vales.
+    * If common characters are used, there's an
+    * increased chance of matching to the earlier strings.
+    */
+    for (i = 0; i < WINDOW_SIZE; i++)
+    {
+        slidingWindow[i] = ' ';
+    }
+
+    while (TRUE)
+    {
+        flags >>= 1; // right shift flags by 1
+        flagsUsed++;
+
+        if (flagsUsed == 8)
+        {
+            /* shift out all flag bits, read a new flag */
+            if ((c = getc(inFile)) == EOF) 
+            {
+                break;
+            }
+
+            flags = c & 0xFF; // get lowest 8 bits (get all flags)
+            flagsUsed = 0;
+        }
+
+        if (flags & 0x01) // if there isn't any encoded data
+        {
+            /* uncoded character */
+            if ((c = getc(inFile)) == EOF)
+            {
+                break;
+            }
+
+            /* write out byte and put it in sliding window */
+            putc(c, outFile);
+            slidingWindow[nextChar] = c;
+            nextChar = (nextChar + 1) % WINDOW_SIZE;
+        }
+        else
+        {
+            /* offset and length */
+            if ((code.offset = getc(inFile)) == EOF) // get the match offset
+            {
+                break;
+            }
+
+            if ((code.length = getc(inFile)) == EOF) // get the length
+            {
+                break;
+            }
+
+            /* unpack offset and length */
+            code.offset <<= 4;
+            code.offset |= ((code.length & 0x00F0) >> 4);
+            code.length = (code.length & 0x000F) + MAX_UNCODED + 1;
+
+            /****************************************************************
+            * Write out decoded string to file and lookahead.  It would be
+            * nice to write to the sliding window instead of the lookahead,
+            * but we could end up overwriting the matching string with the
+            * new string if abs(offset - next char) < match length.
+            ****************************************************************/
+            for (i = 0; i < code.length; i++)
+            {
+                c = slidingWindow[(code.offset + i) % WINDOW_SIZE]; // get the string and decode it
+                putc(c, outFile);
+                uncodedLookahead[i] = c;
+            }
+
+            /* write out decoded string to sliding window */
+            for (i = 0; i < code.length; i++)
+            {
+                slidingWindow[(nextChar + i) % WINDOW_SIZE] =
+                    uncodedLookahead[i];
+            }
+
+            nextChar = (nextChar + code.length) % WINDOW_SIZE;
+        }
+    }
+} 
 
 
