@@ -1,16 +1,14 @@
 #include "lzss.h"
-/****************************************************************************
-*   Function   : FindMatch
-*   Description: This function will search through the slidingWindow
-*                dictionary for the longest sequence matching the MAX_CODED
-*                long string stored in uncodedLookahed.
-*   Parameters : windowHead - head of sliding window
-*                uncodedHead - head of uncoded lookahead buffer
-*   Effects    : NONE
-*   Returned   : The sliding window index where the match starts and the
-*                length of the match.  If there is no match a length of
-*                zero will be returned.
-****************************************************************************/
+/*
+* This function will search through the slidingWindow
+*       dictionary for the longest sequence matching the MAX_CODED
+*       long string stored in uncodedLookahed.
+* input: windowHead - head of sliding window
+*       uncodedHead - head of uncoded lookahead buffer
+* output: The sliding window index where the match starts and the
+*       length of the match.  If there is no match a length of
+*       zero will be returned.
+*/
 encoded_string_t FindMatch(int windowHead, int uncodedHead)
 {
     encoded_string_t matchData;
@@ -37,14 +35,14 @@ encoded_string_t FindMatch(int windowHead, int uncodedHead)
                 j++;
             };
 
-            if (j > matchData.length)
+            if (j > matchData.length) // if we dound a longer match (better match) - KMP algorithem
             {
                 matchData.length = j;
-                matchData.offset = i;
+                matchData.offset = i; // update matches and offset
             }
         }
 
-        if (j >= MAX_CODED)
+        if (j >= MAX_CODED) // if the the matches found is the max we can store
         {
             matchData.length = MAX_CODED;
             break;
@@ -57,6 +55,151 @@ encoded_string_t FindMatch(int windowHead, int uncodedHead)
             break;
         }
     }
-
     return matchData;
 }
+/*
+* This function will read an input file and write an output
+*       file encoded using a slight modification to the LZss
+*       algorithm.  I'm not sure who to credit with the slight
+*       modification to LZss, but the modification is to group the
+*       coded/not coded flag into bytes.  By grouping the flags,
+*       the need to be able to write anything other than a byte
+*       may be avoided as longs as strings encode as a whole byte
+*       multiple.  This algorithm encodes strings as 16 bits (a 12
+*       bit offset + a 4 bit length).
+* Input : inFile - file to encode
+*         outFile - file to write encoded output
+* Output: inFile is encoded and written to outFile
+*/
+void EncodeLZSS(FILE* inFile, FILE* outFile)
+{
+    /* 8 code flags and encoded strings */
+    unsigned char flags, flagPos, encodedData[16];
+    int nextEncoded;                /* index into encodedData */
+    encoded_string_t matchData;
+    int i, c;
+    int len;                        /* length of string */
+    int windowHead, uncodedHead;    /* head of sliding window and lookahead */
+
+    flags = 0;
+    flagPos = 0x01;
+    nextEncoded = 0;
+    windowHead = 0;
+    uncodedHead = 0;
+
+    /*
+    * fill up the sliding window with known values
+    * if common values are used there is a better chance of matching in earlier strings
+    */
+    for (i = 0; i < WINDOW_SIZE; i++)
+    {
+        slidingWindow[i] = ' ';
+    }
+    /*
+    * load MAX_CODED bytes forom input to the lookahead buffer
+    */
+    for (len = 0; len < MAX_CODED && (c = getc(inFile)) != EOF; len++)
+    {
+        uncodedLookahead[len] = c;
+    }
+
+    if (len == 0)
+    {
+        return;  /* inFile was empty */
+    }
+
+    /* Look for matching string in sliding window */
+    matchData = FindMatch(windowHead, uncodedHead);
+
+    /* now encoded the rest of the file until an EOF is read */
+    while (len > 0)
+    {
+        if (matchData.length > len)
+        {
+            /* garbage beyond last data happened to extend match length */
+            matchData.length = len;
+        }
+
+        /* not long enough match.  write uncoded byte */
+        if (matchData.length <= MAX_UNCODED)
+        {
+            matchData.length = 1;   /* set to 1 for 1 byte uncoded */
+            flags |= flagPos;       /* mark with uncoded byte flag */
+            encodedData[nextEncoded++] = uncodedLookahead[uncodedHead]; // gg go next
+        }
+        else
+        {
+            /* match length > MAX_UNCODED.  Encode as offset and length. */
+            encodedData[nextEncoded++] =
+                (unsigned char)((matchData.offset & 0x0FFF) >> 4); // 0x0FFF = 11111111 12 bits
+            encodedData[nextEncoded++] =
+                (unsigned char)(((matchData.offset & 0x000F) << 4) | // 0x000F = 1111 4 bits
+                    (matchData.length - (MAX_UNCODED + 1)));
+        }//binary AND & operator copies a bit to the result if it exists in both operands
+         //binaro OR | operator copies a bit if it exists in neither operand
+
+        if (flagPos == 0x80)
+        {
+            /* we have 8 code flags, write out flags and code buffer */
+            putc(flags, outFile);
+
+            for (i = 0; i < nextEncoded; i++)
+            {
+                /* send at most 8 units of code together */
+                putc(encodedData[i], outFile);
+            }
+
+            /* reset encoded data buffer */
+            flags = 0;
+            flagPos = 0x01;
+            nextEncoded = 0;
+        }
+        else
+        {
+            /* we don't have 8 code flags yet, use next bit for next flag */
+            flagPos <<= 1;
+        }
+
+        /*
+        * Replace the matchData.length worth of bytes we've matched in the
+        * sliding window with new bytes from the input file.
+        */
+        i = 0;
+        while ((i < matchData.length) && ((c = getc(inFile)) != EOF))
+        {
+            /* add old byte into sliding window and new into lookahead */
+            slidingWindow[windowHead] = uncodedLookahead[uncodedHead];
+            uncodedLookahead[uncodedHead] = c;
+            windowHead = (windowHead + 1) % WINDOW_SIZE;
+            uncodedHead = (uncodedHead + 1) % MAX_CODED;
+            i++;
+        }
+
+        /* handle case where we hit EOF before filling lookahead */
+        while (i < matchData.length)
+        {
+            slidingWindow[windowHead] = uncodedLookahead[uncodedHead];
+            /* nothing to add to lookahead here */
+            windowHead = (windowHead + 1) % WINDOW_SIZE;
+            uncodedHead = (uncodedHead + 1) % MAX_CODED;
+            len--;
+            i++;
+        }
+
+        /* find match for the remaining characters */
+        matchData = FindMatch(windowHead, uncodedHead);
+    }
+
+    /* write out any remaining encoded data */
+    if (nextEncoded != 0)
+    {
+        putc(flags, outFile);
+
+        for (i = 0; i < nextEncoded; i++)
+        {
+            putc(encodedData[i], outFile);
+        }
+    }
+}
+
+
