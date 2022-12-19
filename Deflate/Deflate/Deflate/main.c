@@ -10,122 +10,32 @@ int main(int argc, char* argv[])
     outFile = NULL;
     mode = ENCODE;
 
-    /* parse command line */
-    while ((opt = getopt(argc, argv, "cdtni:o:h?")) != -1)
+    if (!(inFile = fopen("tests\\a.txt", "rb")))
     {
-        switch (opt)
-        {
-        case 'c':       /* compression mode */
-            mode = ENCODE;
-            break;
-
-        case 'd':       /* decompression mode */
-            mode = DECODE;
-            break;
-
-        case 'i':       /* input file name */
-            if (inFile != NULL)
-            {
-                fprintf(stderr, "Multiple input files not allowed.\n");
-                fclose(inFile);
-
-                if (outFile != NULL)
-                {
-                    fclose(outFile);
-                }
-
-                exit(EXIT_FAILURE);
-            }
-            else if ((inFile = fopen(optarg, "rb")) == NULL)
-            {
-                perror("Opening inFile");
-
-                if (outFile != NULL)
-                {
-                    fclose(outFile);
-                }
-
-                exit(EXIT_FAILURE);
-            }
-            break;
-
-        case 'o':       /* output file name */
-            if (outFile != NULL)
-            {
-                fprintf(stderr, "Multiple output files not allowed.\n");
-                fclose(outFile);
-
-                if (inFile != NULL)
-                {
-                    fclose(inFile);
-                }
-
-                exit(EXIT_FAILURE);
-            }
-            else if ((outFile = fopen(optarg, "wb")) == NULL)
-            {
-                perror("Opening outFile");
-
-                if (outFile != NULL)
-                {
-                    fclose(inFile);
-                }
-
-                exit(EXIT_FAILURE);
-            }
-            break;
-
-        case 'h':
-        case '?':
-            printf("Usage: lzss <options>\n\n");
-            printf("options:\n");
-            printf("  -c : Encode input file to output file.\n");
-            printf("  -d : Decode input file to output file.\n");
-            printf("  -i <filename> : Name of input file.\n");
-            printf("  -o <filename> : Name of output file.\n");
-            printf("  -h | ?  : Print out command line options.\n\n");
-            printf("Default: lzss -c\n");
-            return(EXIT_SUCCESS);
-        }
+        printf("opening test file failed");
+        fclose(inFile);
     }
-    /* validate command line */
-    if (inFile == NULL)
+    if (!(outFile = fopen("results\\aresults.txt", "wb")))
     {
-        fprintf(stderr, "Input file must be provided\n");
-        fprintf(stderr, "Enter \"lzss -?\" for help.\n");
-
-        if (outFile != NULL)
-        {
-            fclose(outFile);
-        }
-
-        exit(EXIT_FAILURE);
+        printf("opening result file failed");
+        printf("failed");
+        fclose(outFile);
     }
-    else if (outFile == NULL)
-    {
-        fprintf(stderr, "Output file must be provided\n");
-        fprintf(stderr, "Enter \"lzss -?\" for help.\n");
-
-        if (inFile != NULL)
-        {
-            fclose(inFile);
-        }
-
-        exit(EXIT_FAILURE);
-    }
-
-    /* we have valid parameters encode or decode */
-    if (mode == ENCODE)
-    {
-        EncodeLZSS(inFile, outFile);
-    }
-    else
-    {
-        DecodeLZSS(inFile, outFile);
-    }
-
+    
+    encodeTest();
+}
+//run a quick encdoing test
+int encodeTest()
+{
+    FILE* inFile, * outFile;
+    inFile = fopen("tests\\a.txt", "rb");
+    outFile = fopen("results\\aresults.txt", "wb");
+    EncodeLZSS(inFile, outFile);
     fclose(inFile);
     fclose(outFile);
-    return EXIT_SUCCESS;
-
+}
+//run a adecoding test
+int decodeTest()
+{
+    //
 }

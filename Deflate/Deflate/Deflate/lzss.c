@@ -142,6 +142,7 @@ void EncodeLZSS(FILE* inFile, FILE* outFile)
             {
                 /* send at most 8 units of code together */
                 putc(encodedData[i], outFile);
+                putc('c', outFile);
             }
 
             /* reset encoded data buffer */
@@ -195,6 +196,7 @@ void EncodeLZSS(FILE* inFile, FILE* outFile)
             putc(encodedData[i], outFile);
         }
     }
+    printf("done!");
 }
 
 /*
@@ -283,7 +285,7 @@ void DecodeLZSS(FILE* inFile, FILE* outFile)
             ****************************************************************/
             for (i = 0; i < code.length; i++)
             {
-                c = slidingWindow[(code.offset + i) % WINDOW_SIZE]; // get the string and decode it
+                c = slidingWindow[(code.offset + i) % WINDOW_SIZE]; // get the string and 
                 putc(c, outFile);
                 uncodedLookahead[i] = c;
             }
