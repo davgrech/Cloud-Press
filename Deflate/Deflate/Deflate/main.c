@@ -18,9 +18,10 @@ int main(int argc, char* argv[])
     if (!(outFile = fopen("results\\aresults.txt", "wb")))
     {
         printf("opening result file failed");
-        printf("failed");
         fclose(outFile);
     }
+
+
     
     encodeTest();
 }
