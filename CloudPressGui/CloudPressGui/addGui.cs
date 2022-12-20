@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace CloudPressGui
 {
-    public partial class Form1 : Form
+    public partial class addGui : Form
     {
-        public Form1()
+        public addGui()
         {
             InitializeComponent();
         }
@@ -33,5 +33,7 @@ namespace CloudPressGui
             if (fdb.ShowDialog() == DialogResult.OK)
                 txtFolder.Text = fdb.SelectedPath;
         }
+
+        
     }
 }

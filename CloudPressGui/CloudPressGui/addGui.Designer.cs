@@ -1,6 +1,6 @@
 ﻿namespace CloudPressGui
 {
-    partial class Form1
+    partial class addGui
     {
         /// <summary>
         /// Required designer variable.
@@ -48,21 +48,21 @@
             // 
             // txtFileName
             // 
-            this.txtFileName.Location = new System.Drawing.Point(12, 91);
+            this.txtFileName.Location = new System.Drawing.Point(12, 66);
             this.txtFileName.Name = "txtFileName";
             this.txtFileName.Size = new System.Drawing.Size(319, 20);
             this.txtFileName.TabIndex = 0;
             // 
             // txtFolder
             // 
-            this.txtFolder.Location = new System.Drawing.Point(12, 157);
+            this.txtFolder.Location = new System.Drawing.Point(12, 132);
             this.txtFolder.Name = "txtFolder";
             this.txtFolder.Size = new System.Drawing.Size(319, 20);
             this.txtFolder.TabIndex = 1;
             // 
             // fileBtn
             // 
-            this.fileBtn.Location = new System.Drawing.Point(337, 91);
+            this.fileBtn.Location = new System.Drawing.Point(337, 66);
             this.fileBtn.Name = "fileBtn";
             this.fileBtn.Size = new System.Drawing.Size(75, 23);
             this.fileBtn.TabIndex = 2;
@@ -72,7 +72,7 @@
             // 
             // folderBtn
             // 
-            this.folderBtn.Location = new System.Drawing.Point(337, 157);
+            this.folderBtn.Location = new System.Drawing.Point(337, 132);
             this.folderBtn.Name = "folderBtn";
             this.folderBtn.Size = new System.Drawing.Size(75, 23);
             this.folderBtn.TabIndex = 3;
@@ -83,7 +83,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 75);
+            this.label1.Location = new System.Drawing.Point(12, 50);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(72, 13);
             this.label1.TabIndex = 4;
@@ -92,7 +92,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 141);
+            this.label2.Location = new System.Drawing.Point(12, 116);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(60, 13);
             this.label2.TabIndex = 5;
@@ -101,6 +101,7 @@
             // comboBox1
             // 
             this.comboBox1.AllowDrop = true;
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
             "32 MB",
@@ -115,31 +116,32 @@
             "256MB",
             "512MB",
             "1024MB"});
-            this.comboBox1.Location = new System.Drawing.Point(25, 233);
+            this.comboBox1.Location = new System.Drawing.Point(25, 215);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(168, 21);
             this.comboBox1.TabIndex = 7;
             // 
             // comboBox2
             // 
+            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox2.FormattingEnabled = true;
             this.comboBox2.Items.AddRange(new object[] {
             "Best",
             "Normal",
             "Fast",
             "Good"});
-            this.comboBox2.Location = new System.Drawing.Point(25, 285);
+            this.comboBox2.Location = new System.Drawing.Point(25, 265);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(168, 21);
             this.comboBox2.TabIndex = 8;
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(25, 327);
+            this.button3.Location = new System.Drawing.Point(25, 304);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(168, 23);
             this.button3.TabIndex = 9;
-            this.button3.Text = "button3";
+            this.button3.Text = "Set password...";
             this.button3.UseVisualStyleBackColor = true;
             // 
             // checkedListBox1
@@ -162,7 +164,7 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 23);
             this.button4.TabIndex = 11;
-            this.button4.Text = "button4";
+            this.button4.Text = "OK";
             this.button4.UseVisualStyleBackColor = true;
             // 
             // button5
@@ -171,7 +173,7 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(75, 23);
             this.button5.TabIndex = 12;
-            this.button5.Text = "button5";
+            this.button5.Text = "Cancel";
             this.button5.UseVisualStyleBackColor = true;
             // 
             // button6
@@ -180,13 +182,13 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(75, 23);
             this.button6.TabIndex = 13;
-            this.button6.Text = "button6";
+            this.button6.Text = "Help";
             this.button6.UseVisualStyleBackColor = true;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(25, 214);
+            this.label3.Location = new System.Drawing.Point(25, 199);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(75, 13);
             this.label3.TabIndex = 14;
@@ -195,7 +197,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(25, 266);
+            this.label4.Location = new System.Drawing.Point(25, 249);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(105, 13);
             this.label4.TabIndex = 15;
@@ -204,13 +206,13 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(244, 217);
+            this.label5.Location = new System.Drawing.Point(244, 199);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(88, 13);
             this.label5.TabIndex = 16;
             this.label5.Text = "Archiving options";
             // 
-            // Form1
+            // addGui
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -231,7 +233,7 @@
             this.Controls.Add(this.fileBtn);
             this.Controls.Add(this.txtFolder);
             this.Controls.Add(this.txtFileName);
-            this.Name = "Form1";
+            this.Name = "addGui";
             this.Text = "Form1";
             this.ResumeLayout(false);
             this.PerformLayout();
