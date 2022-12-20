@@ -16,5 +16,19 @@ namespace CloudPressGui
         {
             InitializeComponent();
         }
+
+        private void chooseBtn_Click(object sender, EventArgs e)
+        {
+            using (FolderBrowserDialog dialog = new FolderBrowserDialog() { Description = "Select your path." })
+            {
+
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    txtPath.Text = dialog.SelectedPath;
+                }
+            }
+        }
+
+       
     }
 }

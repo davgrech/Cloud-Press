@@ -10,3 +10,4 @@ C:\Users\user\Desktop\Dolev\magshimimProjects\Projects_2022\Advanced_Project_Dol
 C:\Users\user\Desktop\Dolev\magshimimProjects\Projects_2022\Advanced_Project_Dolev\OfficialProject\ashkelon-1206-compressor\CloudPressGui\CloudPressGui\obj\Debug\CloudPressGui.pdb
 C:\Users\user\Desktop\Dolev\magshimimProjects\Projects_2022\Advanced_Project_Dolev\OfficialProject\ashkelon-1206-compressor\CloudPressGui\CloudPressGui\obj\Debug\CloudPressGui.MainMenu.resources
 C:\Users\user\Desktop\Dolev\magshimimProjects\Projects_2022\Advanced_Project_Dolev\OfficialProject\ashkelon-1206-compressor\CloudPressGui\CloudPressGui\obj\Debug\CloudPressGui.addGui.resources
+C:\Users\user\Desktop\Dolev\magshimimProjects\Projects_2022\Advanced_Project_Dolev\OfficialProject\ashkelon-1206-compressor\CloudPressGui\CloudPressGui\obj\Debug\CloudPressGui.extractGui.resources
