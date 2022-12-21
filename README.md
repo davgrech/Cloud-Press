@@ -1,2 +1,1 @@
-This is a testing environment made especially for me to test the program as fast as possible, 
-with a single clone. and to easily clone the program to a remote machine
+This branch contains a failed attemp at adding huffman encoding to our preexisting lzss encoding.I am keeping it here for archival purposes
