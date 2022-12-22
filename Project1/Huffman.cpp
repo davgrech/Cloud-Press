@@ -24,32 +24,45 @@ void clearPriorityQueue(std::priority_queue<HuffNode*, std::vector<HuffNode*>, c
         treeHeap.pop();
     }
 }
-
+/*
+* This function parses XX::XX values and adds them to the frequency map
+* input: char * XX::XX string (parsed from file)
+* output: - (adds values to freq map)
+*/
+void ParseSubStr(char* str)
+{
+    char* chr, *frequency;
+    str = strtok(str, "::");
+    chr = str; // first value is char 
+    str = strtok(NULL, "::");
+    frequency = str; // second is frequency
+    freq[(unsigned char)chr] = std::atoi(frequency);
+    //std::cout << "char is " << (unsigned char)chr << " values is " << std::atoi(frequency) << std::endl;
+    //std::cout << freq['0'] << std::endl;
+}
 /*
 * parse the frequency dict in the encoded huffman files
 * loads map freq with all chars and thyere frequencies
 */
 void parseFreq(std::string str)
 {
-    freq.clear();
+    //freq.clear();
     std::string specific_freq;
     unsigned char chr;
-    unsigned char frequency;
+    int frequency;
+    char *pre_strtok, * freq_str;
 
     char* c = const_cast<char*>(str.c_str());
     strcpy(c, str.c_str());
-    char* freq_str = strtok(c, "==");
+    freq_str = strtok(c, "==");
     freq_str = strtok(NULL, "==");// get the frequency dict
-    while (freq_str = strtok(freq_str, "||"))
+    std::cout << freq_str << std::endl;
+    freq_str = strtok(freq_str, "||");
+
+    while (freq_str != NULL)
     {
         std::cout << freq_str << std::endl;
-        while (freq_str = strtok(freq_str, "::"))
-        {
-            chr = (unsigned char)freq_str;
-            freq_str = strtok(NULL, "::");
-            frequency = (unsigned char)freq_str;
-            freq[chr] = frequency;
-        }
+        //ParseSubStr(freq_str);
         freq_str = strtok(NULL, "||");
     }
 }

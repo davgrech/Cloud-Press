@@ -134,8 +134,8 @@ int main(int argc, char* argv[])
         printf("opening result file failed");
         fclose(outFile);
     }
-    //decodeDelfate(outFilePath, inFilePath);
-    EncodeDelfate(inFilePath, outFilePath);
+    decodeDelfate(outFilePath, inFilePath);
+    //EncodeDelfate(inFilePath, outFilePath);
     //runEncoding(inFilePath, outFilePath);
     //runDecoding(outFilePath, inFilePath);
     //encodeBenchamrk();
