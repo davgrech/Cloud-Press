@@ -13,7 +13,7 @@ void clearFile(char* path_to_file)
 /*
 * write content to a file ty
 */
-void writeContentToFile(std::string str, const char * path)
+void writeContentToFile(std::string str, const char* path)
 {
     std::ofstream out(path);
     out << str;
@@ -46,11 +46,12 @@ void EncodeDelfate(char* in_path, char* out_path)
         strcpy(out_path, "output.txt");
     }
     EncodeLZSS(input, output); // encode with lzss
+    fclose(output);
+    fclose(input);
 
     huffEncode(readFileToString(out_path), out_path); // huffman encoding (pass out_path since it is the file lzss outputted to)
 
-    fclose(output);
-    fclose(input);
+
 
     std::cout << "\ndone";
     return;
@@ -133,12 +134,12 @@ int main(int argc, char* argv[])
         printf("opening result file failed");
         fclose(outFile);
     }
-    decodeDelfate(outFilePath, inFilePath);
-    //EncodeDelfate(inFilePath, outFilePath);
+    //decodeDelfate(outFilePath, inFilePath);
+    EncodeDelfate(inFilePath, outFilePath);
     //runEncoding(inFilePath, outFilePath);
     //runDecoding(outFilePath, inFilePath);
     //encodeBenchamrk();
-    
+
 
 
 }

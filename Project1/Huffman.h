@@ -14,10 +14,10 @@
 struct HuffNode {
 
     unsigned char data;
-	int freq;
-	HuffNode* left, * right;
+    int freq;
+    HuffNode* left, * right;
 public:
-	HuffNode(unsigned char data, int freq);
+    HuffNode(unsigned char data, int freq);
 
 
 };

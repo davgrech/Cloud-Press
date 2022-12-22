@@ -1,9 +1,3 @@
-﻿  lzss.c
-  main.c
-C:\Users\123dg\Desktop\tests\Project1\main.c(28,20): warning C4013: 'encodeBenchamrk' undefined; assuming extern returning int
-C:\Users\123dg\Desktop\tests\Project1\main.c(5,9): warning C4101: 'opt': unreferenced local variable
-C:\Users\123dg\Desktop\tests\Project1\main.c(66,29): warning C4013: 'strcpy' undefined; assuming extern returning int
-  Generating Code...
-C:\Users\123dg\Desktop\tests\Project1\main.c(82): warning C4716: 'decodeTest': must return a value
-C:\Users\123dg\Desktop\tests\Project1\main.c(77): warning C4716: 'encodeBenchamrk': must return a value
-  Project1.vcxproj -> C:\Users\123dg\Desktop\tests\x64\Debug\Project1.exe
+﻿  main.cpp
+C:\Users\123dg\Desktop\ashkelon-1206-compressor\Project1\main.cpp(113,9): warning C4101: 'opt': unreferenced local variable
+  Project1.vcxproj -> C:\Users\123dg\Desktop\ashkelon-1206-compressor\x64\Debug\Project1.exe

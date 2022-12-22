@@ -42,6 +42,7 @@ void parseFreq(std::string str)
     freq_str = strtok(NULL, "==");// get the frequency dict
     while (freq_str = strtok(freq_str, "||"))
     {
+        std::cout << freq_str << std::endl;
         while (freq_str = strtok(freq_str, "::"))
         {
             chr = (unsigned char)freq_str;
@@ -147,7 +148,7 @@ void huffEncode(std::string str, const char* out_path)
     std::wstring xaxa;
     calcFreq(str, str.length());
     HuffmanCodes(str.length());
-     
+
     myfile.open(out_path);
     myfile.clear();
     myfile.close();
@@ -171,9 +172,12 @@ void huffEncode(std::string str, const char* out_path)
         myfile << "::";
         myfile << itr->second;
         myfile << "||";
-        
+
     }
-   
+    //myfile << "\0";
+    //myfile << EOF;
+    myfile.close();
+
 }
 
 

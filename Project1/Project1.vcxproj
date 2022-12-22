@@ -19,10 +19,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Huffman.cpp" />
     <ClCompile Include="lzss.c" />
-    <ClCompile Include="main.c" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Huffman.h" />
     <ClInclude Include="lzss.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
