@@ -50,7 +50,7 @@ void parseFreq(std::string str)
     std::string specific_freq;
     unsigned char chr;
     int frequency;
-    char *pre_strtok, * freq_str;
+    char *freq_str_copy, * freq_str;
 
     char* c = const_cast<char*>(str.c_str());
     strcpy(c, str.c_str());
@@ -62,7 +62,8 @@ void parseFreq(std::string str)
     while (freq_str != NULL)
     {
         std::cout << freq_str << std::endl;
-        //ParseSubStr(freq_str);
+        freq_str_copy = freq_str;
+        ParseSubStr(freq_str_copy);
         freq_str = strtok(NULL, "||");
     }
 }
