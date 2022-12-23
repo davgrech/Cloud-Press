@@ -24,6 +24,7 @@ void clearPriorityQueue(std::priority_queue<HuffNode*, std::vector<HuffNode*>, c
         treeHeap.pop();
     }
 }
+
 /*
 * This function parses XX::XX values and adds them to the frequency map
 * input: char * XX::XX string (parsed from file)
@@ -31,13 +32,15 @@ void clearPriorityQueue(std::priority_queue<HuffNode*, std::vector<HuffNode*>, c
 */
 void ParseSubStr(char* str)
 {
-    char* chr, *frequency;
+    char *frequency;
+    unsigned char* chr;
+
     str = strtok(str, "::");
-    chr = str; // first value is char 
+    chr = (unsigned char*)str; // first value is char 
     str = strtok(NULL, "::");
     frequency = str; // second is frequency
-    freq.insert({ (unsigned char)chr, std::atoi(frequency) });
 
+    freq.emplace((unsigned char)chr, std::atoi(frequency));
     for (auto itr = freq.begin(); itr != freq.end(); ++itr) {
         std::cout << itr->first
             << '\t' << itr->second << '\n';
@@ -45,12 +48,15 @@ void ParseSubStr(char* str)
 
 
 }
+
+
 /*
 * parse the frequency dict in the encoded huffman files
 * loads map freq with all chars and thyere frequencies
 */
 void parseFreq(std::string str)
 {
+    freq.clear();
     size_t pos = 0;
     std::string delimiter = "==";
     std::string token = str.substr(0, str.find(delimiter));
