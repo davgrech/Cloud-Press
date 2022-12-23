@@ -36,9 +36,14 @@ void ParseSubStr(char* str)
     chr = str; // first value is char 
     str = strtok(NULL, "::");
     frequency = str; // second is frequency
-    freq[(unsigned char)chr] = std::atoi(frequency);
-    //std::cout << "char is " << (unsigned char)chr << " values is " << std::atoi(frequency) << std::endl;
-    //std::cout << freq['0'] << std::endl;
+    freq.insert({ (unsigned char)chr, std::atoi(frequency) });
+
+    for (auto itr = freq.begin(); itr != freq.end(); ++itr) {
+        std::cout << itr->first
+            << '\t' << itr->second << '\n';
+    }
+
+
 }
 /*
 * parse the frequency dict in the encoded huffman files
@@ -46,8 +51,8 @@ void ParseSubStr(char* str)
 */
 void parseFreq(std::string str)
 {
-    std::string delimiter = "==";
     size_t pos = 0;
+    std::string delimiter = "==";
     std::string token = str.substr(0, str.find(delimiter));
     str.erase(0, str.find(delimiter) + delimiter.length()); // get the huff dict
     
@@ -58,16 +63,19 @@ void parseFreq(std::string str)
         token = str.substr(0, pos);
         if (token != "") {
             ParseSubStr(const_cast<char*>(token.c_str()));
-            std::cout << token << std::endl;
+            //std::cout << token << std::endl;
         }
         str.erase(0, pos + delimiter.length());
     }
 
-    std::cout << std::endl;
-    for (auto itr = freq.begin(); itr != freq.end(); itr++)
-    {
-        std::cout << "char " << itr->first << "has " << itr->second << "occurences\n";
-    }
+    //std::cout << std::endl;
+    /*
+    *     for (auto itr = freq.begin(); itr != freq.end(); itr++)
+        {
+            std::cout << "char " << itr->first << "has " << itr->second << "occurences\n";
+        }
+    */
+
 
 
 
@@ -188,7 +196,7 @@ void huffEncode(std::string str, const char* out_path)
     for (auto itr = freq.begin(); itr != freq.end(); itr++) // insert codes
     {
 
-        std::cout << int(itr->first) << " " << (char)itr->first << " has " << itr->second << " appearances\n";
+        //std::cout << int(itr->first) << " " << (char)itr->first << " has " << itr->second << " appearances\n";
         myfile << "||";
         myfile << (int)itr->first;
         myfile << "::";
@@ -216,6 +224,9 @@ std::string decodeHuffman(std::string str)
     //now that i have all frequencies and chars - we can build a new hufftree
     HuffmanCodes(freq.size()); // create huff tree
 
+    std::string delimiter = "==";
+    str = str.substr(0, str.find(delimiter));
+
     struct HuffNode* root = treeHeap.top();
     struct HuffNode* curr = root;
 
@@ -226,7 +237,7 @@ std::string decodeHuffman(std::string str)
             curr = curr->right;
 
         // reached leaf node
-        if (curr->left == NULL and curr->right == NULL) {
+        if (curr->left == nullptr and curr->right == nullptr) {
             ans += curr->data;
             curr = root;
         }

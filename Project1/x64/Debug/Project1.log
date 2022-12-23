@@ -1,6 +1,6 @@
 ﻿  Huffman.cpp
-C:\Users\123dg\Desktop\ashkelon-1206-compressor\Project1\Huffman.cpp(39,28): warning C4302: 'type cast': truncation from 'char *' to 'unsigned char'
-C:\Users\123dg\Desktop\ashkelon-1206-compressor\Project1\Huffman.cpp(171,31): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\123dg\Desktop\ashkelon-1206-compressor\Project1\Huffman.cpp(172,30): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\123dg\Desktop\ashkelon-1206-compressor\Project1\Huffman.cpp(217,29): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\123dg\Desktop\ashkelon-1206-compressor\Project1\Huffman.cpp(39,37): warning C4302: 'type cast': truncation from 'char *' to 'unsigned char'
+C:\Users\123dg\Desktop\ashkelon-1206-compressor\Project1\Huffman.cpp(179,31): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\123dg\Desktop\ashkelon-1206-compressor\Project1\Huffman.cpp(180,30): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\123dg\Desktop\ashkelon-1206-compressor\Project1\Huffman.cpp(225,29): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
   Project1.vcxproj -> C:\Users\123dg\Desktop\ashkelon-1206-compressor\x64\Debug\Project1.exe
