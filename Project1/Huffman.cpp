@@ -46,26 +46,34 @@ void ParseSubStr(char* str)
 */
 void parseFreq(std::string str)
 {
-    //freq.clear();
-    std::string specific_freq;
-    unsigned char chr;
-    int frequency;
-    char *freq_str_copy, * freq_str;
+    std::string delimiter = "==";
+    size_t pos = 0;
+    std::string token = str.substr(0, str.find(delimiter));
+    str.erase(0, str.find(delimiter) + delimiter.length()); // get the huff dict
+    
 
-    char* c = const_cast<char*>(str.c_str());
-    strcpy(c, str.c_str());
-    freq_str = strtok(c, "==");
-    freq_str = strtok(NULL, "==");// get the frequency dict
-    std::cout << freq_str << std::endl;
-    freq_str = strtok(freq_str, "||");
 
-    while (freq_str != NULL)
-    {
-        std::cout << freq_str << std::endl;
-        freq_str_copy = freq_str;
-        ParseSubStr(freq_str_copy);
-        freq_str = strtok(NULL, "||");
+    delimiter = "||";
+    while ((pos = str.find(delimiter)) != std::string::npos) {
+        token = str.substr(0, pos);
+        if (token != "") {
+            ParseSubStr(const_cast<char*>(token.c_str()));
+            std::cout << token << std::endl;
+        }
+        str.erase(0, pos + delimiter.length());
     }
+
+    std::cout << std::endl;
+    for (auto itr = freq.begin(); itr != freq.end(); itr++)
+    {
+        std::cout << "char " << itr->first << "has " << itr->second << "occurences\n";
+    }
+
+
+
+    
+        
+    
 }
 
 //checks if given char is a number
