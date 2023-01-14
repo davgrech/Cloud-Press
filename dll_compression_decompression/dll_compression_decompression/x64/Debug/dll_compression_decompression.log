@@ -1,0 +1,7 @@
+﻿  compressor.cpp
+C:\Users\Dolev\Desktop\Dolev\ashkelon-1206-compressor\dll_compression_decompression\dll_compression_decompression\compressor.cpp(87,6): warning C4273: 'EncodeLZSS': inconsistent dll linkage
+C:\Users\Dolev\Desktop\Dolev\ashkelon-1206-compressor\dll_compression_decompression\dll_compression_decompression\compressor.h(25,33): message : see previous definition of 'EncodeLZSS'
+C:\Users\Dolev\Desktop\Dolev\ashkelon-1206-compressor\dll_compression_decompression\dll_compression_decompression\compressor.cpp(220,6): warning C4273: 'DecodeLZSS': inconsistent dll linkage
+C:\Users\Dolev\Desktop\Dolev\ashkelon-1206-compressor\dll_compression_decompression\dll_compression_decompression\compressor.h(26,33): message : see previous definition of 'DecodeLZSS'
+     Creating library C:\Users\Dolev\Desktop\Dolev\ashkelon-1206-compressor\dll_compression_decompression\x64\Debug\dll_compression_decompression.lib and object C:\Users\Dolev\Desktop\Dolev\ashkelon-1206-compressor\dll_compression_decompression\x64\Debug\dll_compression_decompression.exp
+  dll_compression_decompression.vcxproj -> C:\Users\Dolev\Desktop\Dolev\ashkelon-1206-compressor\dll_compression_decompression\x64\Debug\dll_compression_decompression.dll
