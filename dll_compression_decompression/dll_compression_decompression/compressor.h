@@ -22,5 +22,5 @@
 // Initialize a Fibonacci relation sequence
 // such that F(0) = a, F(1) = b.
 // This function must be called before any other function.
-extern "C" MATHLIBRARY_API void EncodeLZSS(FILE* inFile, FILE* outFile);
-extern "C" MATHLIBRARY_API void DecodeLZSS(FILE* inFile, FILE* outFile);   /* decoding routine */
+extern "C" MATHLIBRARY_API void EncodeLZSS(char* inFilePath, char* outFilePath);
+extern "C" MATHLIBRARY_API void DecodeLZSS(char* inFilePath, char* outFilePath);   /* decoding routine */

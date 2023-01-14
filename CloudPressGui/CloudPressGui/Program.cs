@@ -16,7 +16,7 @@ namespace CloudPressGui
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new extractGui());
+            Application.Run(new addGui());
         }
     }
 }

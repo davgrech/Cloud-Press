@@ -84,8 +84,20 @@ encoded_string_t findMatch(int windowHead, int uncodedHead)
 }
 
 
-void EncodeLZSS(FILE* inFile, FILE* outFile)
+void EncodeLZSS(char* inFilePath, char* outFilePath)
 {
+    //open files
+    FILE* inFile;
+    FILE* outFile;
+    errno_t error_codeA, error_codeB;
+    error_codeA = fopen_s(&inFile, inFilePath, "w+");
+
+    error_codeB = fopen_s(&outFile, outFilePath, "w+");
+    
+    if (error_codeA != 0 || error_codeB != 0)
+    {
+        return;
+    }
     unsigned char flags, flagPos, encodedData[16];
     int nextEncoded;                /* index into encodedData */
     encoded_string_t matchData;
@@ -217,8 +229,20 @@ void EncodeLZSS(FILE* inFile, FILE* outFile)
 
 }
 
-void DecodeLZSS(FILE* inFile, FILE* outFile)
+void DecodeLZSS(char* inFilePath, char* outFilePath)
 {
+    //open files
+    FILE* inFile;
+    FILE* outFile;
+    errno_t error_codeA, error_codeB;
+    error_codeA = fopen_s(&inFile, inFilePath, "r");
+
+    error_codeB = fopen_s(&outFile, outFilePath, "r");
+    if (error_codeA != 0 || error_codeB != 0)
+    {
+        return;
+    }
+
     int  i, c;
     unsigned char flags, flagsUsed;     /* encoded/not encoded flag */
     int nextChar;                       /* next char in sliding window */
