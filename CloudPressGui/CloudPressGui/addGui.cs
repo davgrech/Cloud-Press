@@ -18,9 +18,8 @@ namespace CloudPressGui
     public partial class addGui : Form
     {
         //TODO: NEED TO IMPORT THE FUNCTION WITHOUT ERRORS
-
-        [DllImport("dll_compression_decompression.dll", CallingConvention = CallingConvention.Cdecl)]
-        private static extern void EncodeLZSS(char[] inFilePath, char[] outFilePath);
+        [DllImport(@"C:\\Users\\Dolev\\Desktop\\Dolev\\ashkelon-1206-compressor\\dll_compression_decompression\\x64\Debug\\dll_compression_decompression.dll", CallingConvention =  CallingConvention.Cdecl)]
+        static extern void EncodeLZSS(string inFilePath, string outFilePath);
 
         public addGui()
         {
@@ -66,11 +65,12 @@ namespace CloudPressGui
                 return;
             }
             //destination path
-            String dest_path = Path.Combine(txtFolder.Text, path_name);
-            String src_path = txtFileName.Text;
-           
+            string dest_path = Path.Combine(txtFolder.Text, path_name);
+            string src_path = txtFileName.Text;
+            
+
             //comrpess source file and store in output file
-            EncodeLZSS(src_path.ToCharArray(), output.ToCharArray());
+            EncodeLZSS(src_path, output);
             //create the compressed file
             File.Create(dest_path);
             //copy from the output file to the folder

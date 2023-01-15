@@ -1,10 +1,10 @@
 // MathLibrary.h - Contains declarations of math functions
 #pragma once
 
-#ifdef MATHLIBRARY_EXPORTS
-#define MATHLIBRARY_API __declspec(dllexport)
+#ifdef COMPRESS_EXPORTS
+#define COMPRESS_API __declspec(dllexport)
 #else
-#define MATHLIBRARY_API __declspec(dllimport)
+#define COMPRESS_API __declspec(dllimport)
 #endif
 
 #include <stdio.h>
@@ -22,5 +22,5 @@
 // Initialize a Fibonacci relation sequence
 // such that F(0) = a, F(1) = b.
 // This function must be called before any other function.
-extern "C" MATHLIBRARY_API void EncodeLZSS(char* inFilePath, char* outFilePath);
-extern "C" MATHLIBRARY_API void DecodeLZSS(char* inFilePath, char* outFilePath);   /* decoding routine */
+extern "C" COMPRESS_API void EncodeLZSS(char* inFilePath, char* outFilePath);
+extern "C" COMPRESS_API void DecodeLZSS(char* inFilePath, char* outFilePath);   /* decoding routine */
