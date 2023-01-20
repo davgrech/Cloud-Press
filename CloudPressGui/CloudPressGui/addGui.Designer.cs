@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.txtFileName = new System.Windows.Forms.TextBox();
+            this.txtArchiveName = new System.Windows.Forms.TextBox();
             this.txtFolder = new System.Windows.Forms.TextBox();
             this.fileBtn = new System.Windows.Forms.Button();
             this.folderBtn = new System.Windows.Forms.Button();
@@ -46,13 +46,13 @@
             this.label5 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // txtFileName
+            // txtArchiveName
             // 
-            this.txtFileName.Location = new System.Drawing.Point(16, 81);
-            this.txtFileName.Margin = new System.Windows.Forms.Padding(4);
-            this.txtFileName.Name = "txtFileName";
-            this.txtFileName.Size = new System.Drawing.Size(424, 22);
-            this.txtFileName.TabIndex = 0;
+            this.txtArchiveName.Location = new System.Drawing.Point(16, 81);
+            this.txtArchiveName.Margin = new System.Windows.Forms.Padding(4);
+            this.txtArchiveName.Name = "txtArchiveName";
+            this.txtArchiveName.Size = new System.Drawing.Size(424, 22);
+            this.txtArchiveName.TabIndex = 0;
             // 
             // txtFolder
             // 
@@ -247,7 +247,7 @@
             this.Controls.Add(this.folderBtn);
             this.Controls.Add(this.fileBtn);
             this.Controls.Add(this.txtFolder);
-            this.Controls.Add(this.txtFileName);
+            this.Controls.Add(this.txtArchiveName);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "addGui";
             this.Text = "Form1";
@@ -259,7 +259,7 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox txtFileName;
+        private System.Windows.Forms.TextBox txtArchiveName;
         private System.Windows.Forms.TextBox txtFolder;
         private System.Windows.Forms.Button fileBtn;
         private System.Windows.Forms.Button folderBtn;

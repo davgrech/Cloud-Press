@@ -34,7 +34,7 @@ namespace CloudPressGui
             using (OpenFileDialog ofd = new OpenFileDialog() { Filter = "All files |*.*", ValidateNames = true, Multiselect = false })
             {
                 if (ofd.ShowDialog() == DialogResult.OK)
-                    txtFileName.Text = ofd.FileName;
+                    txtArchiveName.Text = ofd.FileName;
             }
         }
 
@@ -53,30 +53,39 @@ namespace CloudPressGui
             //the temo file we will 
             String output = "output.txt";
 
-
-            if (txtFileName.Text == "" || txtFolder.Text == "")
+            //check fields
+            if (txtArchiveName.Text == "" || txtFolder.Text == "")
             {
                 return;
             }
             
             //get name  of future rar archive
-            String nameOfArchive = Path.GetFileNameWithoutExtension(txtFileName.Text)+".rar";
+            String nameOfArchive = Path.GetFileNameWithoutExtension(txtArchiveName.Text)+".rar";
            
 
             if (!Directory.Exists(txtFolder.Text))
             {
                 return;
             }
+
             //destination path for our future archive
-            string dest_path = Path.Combine(txtFolder.Text, nameOfArchive);
-            string src_path = txtFileName.Text;
+            string archivePath = Path.Combine(txtFolder.Text, nameOfArchive);
+           
+           
 
-
-
+            
 
             //algorithm --->
-            //comrpess source file and store in output file
-            EncodeLZSS(src_path, "C:\\Users\\user\\Desktop\\abc.txt");
+
+            //comrpess each file selected  and store in the archive file
+            foreach(string pathOfFile in PATHS_TO_COMPRESS){
+                //maybe create those files and change only their path
+                EncodeLZSS(pathOfFile, "");
+              
+
+               
+            }
+            //make rar file with all the files
             
 
 
