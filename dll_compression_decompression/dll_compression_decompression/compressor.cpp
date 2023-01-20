@@ -90,7 +90,7 @@ void EncodeLZSS(char* inFilePath, char* outFilePath)
     FILE* inFile;
     FILE* outFile;
     errno_t error_codeA, error_codeB;
-    error_codeA = fopen_s(&inFile, inFilePath, "w+");
+    error_codeA = fopen_s(&inFile, inFilePath, "r");
 
     error_codeB = fopen_s(&outFile, outFilePath, "w+");
     
@@ -226,6 +226,9 @@ void EncodeLZSS(char* inFilePath, char* outFilePath)
         }
     }
     printf("done!");
+    fclose(inFile);
+    fclose(outFile);
+
 
 }
 
@@ -237,7 +240,7 @@ void DecodeLZSS(char* inFilePath, char* outFilePath)
     errno_t error_codeA, error_codeB;
     error_codeA = fopen_s(&inFile, inFilePath, "r");
 
-    error_codeB = fopen_s(&outFile, outFilePath, "r");
+    error_codeB = fopen_s(&outFile, outFilePath, "w");
     if (error_codeA != 0 || error_codeB != 0)
     {
         return;
@@ -334,4 +337,5 @@ void DecodeLZSS(char* inFilePath, char* outFilePath)
             nextChar = (nextChar + code.length) % WINDOW_SIZE;
         }
     }
+    printf("done!");
 }

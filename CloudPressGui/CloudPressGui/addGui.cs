@@ -17,13 +17,16 @@ namespace CloudPressGui
 
     public partial class addGui : Form
     {
+        string[] PATHS_TO_COMPRESS; 
         //TODO: NEED TO IMPORT THE FUNCTION WITHOUT ERRORS
-        [DllImport(@"C:\\Users\\Dolev\\Desktop\\Dolev\\ashkelon-1206-compressor\\dll_compression_decompression\\x64\Debug\\dll_compression_decompression.dll", CallingConvention =  CallingConvention.Cdecl)]
+        [DllImport(@"C:\\Users\\user\\Desktop\\Dolev\\magshimimProjects\\Projects_2022\\ashkelon-1206-compressor\\dll_compression_decompression\\x64\\Debug\\dll_compression_decompression.dll", CallingConvention =  CallingConvention.Cdecl)]
         static extern void EncodeLZSS(string inFilePath, string outFilePath);
 
-        public addGui()
+        public addGui(String[] paths)
         {
             InitializeComponent();
+            //all the passes the user selected to add
+            PATHS_TO_COMPRESS = paths;
         }
 
         private void fileBtn_Click(object sender, EventArgs e)
@@ -47,7 +50,7 @@ namespace CloudPressGui
 
         private void compress_Click(object sender, EventArgs e)
         {
-
+            //the temo file we will 
             String output = "output.txt";
 
 
@@ -55,26 +58,26 @@ namespace CloudPressGui
             {
                 return;
             }
-            //get the name 
-         
-            String path_name = Path.GetFileName(txtFileName.Text);
-
+            
+            //get name  of future rar archive
+            String nameOfArchive = Path.GetFileNameWithoutExtension(txtFileName.Text)+".rar";
+           
 
             if (!Directory.Exists(txtFolder.Text))
             {
                 return;
             }
-            //destination path
-            string dest_path = Path.Combine(txtFolder.Text, path_name);
+            //destination path for our future archive
+            string dest_path = Path.Combine(txtFolder.Text, nameOfArchive);
             string src_path = txtFileName.Text;
-            
 
+
+
+
+            //algorithm --->
             //comrpess source file and store in output file
-            EncodeLZSS(src_path, output);
-            //create the compressed file
-            File.Create(dest_path);
-            //copy from the output file to the folder
-            File.Copy(output, dest_path);
+            EncodeLZSS(src_path, "C:\\Users\\user\\Desktop\\abc.txt");
+            
 
 
 

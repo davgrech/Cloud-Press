@@ -1,3 +1,6 @@
-﻿  LINK : C:\Users\Dolev\Desktop\Dolev\ashkelon-1206-compressor\dll_compression_decompression\x64\Debug\dll_compression_decompression.dll not found or not built by the last incremental link; performing full link
-     Creating library C:\Users\Dolev\Desktop\Dolev\ashkelon-1206-compressor\dll_compression_decompression\x64\Debug\dll_compression_decompression.lib and object C:\Users\Dolev\Desktop\Dolev\ashkelon-1206-compressor\dll_compression_decompression\x64\Debug\dll_compression_decompression.exp
-  dll_compression_decompression.vcxproj -> C:\Users\Dolev\Desktop\Dolev\ashkelon-1206-compressor\dll_compression_decompression\x64\Debug\dll_compression_decompression.dll
+﻿  compressor.cpp
+C:\Users\user\Desktop\Dolev\magshimimProjects\Projects_2022\ashkelon-1206-compressor\dll_compression_decompression\dll_compression_decompression\compressor.cpp(87,6): warning C4273: 'EncodeLZSS': inconsistent dll linkage
+C:\Users\user\Desktop\Dolev\magshimimProjects\Projects_2022\ashkelon-1206-compressor\dll_compression_decompression\dll_compression_decompression\compressor.h(25,30): message : see previous definition of 'EncodeLZSS'
+C:\Users\user\Desktop\Dolev\magshimimProjects\Projects_2022\ashkelon-1206-compressor\dll_compression_decompression\dll_compression_decompression\compressor.cpp(235,6): warning C4273: 'DecodeLZSS': inconsistent dll linkage
+C:\Users\user\Desktop\Dolev\magshimimProjects\Projects_2022\ashkelon-1206-compressor\dll_compression_decompression\dll_compression_decompression\compressor.h(26,30): message : see previous definition of 'DecodeLZSS'
+  dll_compression_decompression.vcxproj -> C:\Users\user\Desktop\Dolev\magshimimProjects\Projects_2022\ashkelon-1206-compressor\dll_compression_decompression\x64\Debug\dll_compression_decompression.dll

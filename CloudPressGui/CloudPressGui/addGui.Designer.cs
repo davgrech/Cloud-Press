@@ -61,7 +61,6 @@
             this.txtFolder.Name = "txtFolder";
             this.txtFolder.Size = new System.Drawing.Size(424, 22);
             this.txtFolder.TabIndex = 1;
-           
             // 
             // fileBtn
             // 
@@ -160,8 +159,6 @@
             this.checkedListBox1.Items.AddRange(new object[] {
             "Delete files after archiving",
             "Create solid archive",
-            "Add recovery record",
-            "Test archive files",
             "Lock archive"});
             this.checkedListBox1.Location = new System.Drawing.Point(329, 287);
             this.checkedListBox1.Margin = new System.Windows.Forms.Padding(4);
