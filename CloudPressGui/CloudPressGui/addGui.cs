@@ -9,7 +9,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.IO;
-
+using SharpCompress.Archives;
+using SharpCompress.Archives.Rar;
+using SevenZip;
 
 namespace CloudPressGui
 {
@@ -17,16 +19,20 @@ namespace CloudPressGui
 
     public partial class addGui : Form
     {
-        string[] PATHS_TO_COMPRESS; 
+        string[] PATHS_TO_COMPRESS = { "C:\\Users\\user\\Desktop\\abc.txt" , "C:\\Users\\user\\Desktop\\hu.txt" }; 
         //TODO: NEED TO IMPORT THE FUNCTION WITHOUT ERRORS
         [DllImport(@"C:\\Users\\user\\Desktop\\Dolev\\magshimimProjects\\Projects_2022\\ashkelon-1206-compressor\\dll_compression_decompression\\x64\\Debug\\dll_compression_decompression.dll", CallingConvention =  CallingConvention.Cdecl)]
         static extern void EncodeLZSS(string inFilePath, string outFilePath);
+
+     
+     
 
         public addGui(String[] paths)
         {
             InitializeComponent();
             //all the passes the user selected to add
-            PATHS_TO_COMPRESS = paths;
+
+            //PATHS_TO_COMPRESS = paths;
         }
 
         private void fileBtn_Click(object sender, EventArgs e)
@@ -50,18 +56,17 @@ namespace CloudPressGui
 
         private void compress_Click(object sender, EventArgs e)
         {
-            //the temo file we will 
-            String output = "output.txt";
+         
 
             //check fields
             if (txtArchiveName.Text == "" || txtFolder.Text == "")
             {
                 return;
             }
-            
+
             //get name  of future rar archive
-            String nameOfArchive = Path.GetFileNameWithoutExtension(txtArchiveName.Text)+".rar";
-           
+            String nameOfArchive = Path.GetFileNameWithoutExtension(txtArchiveName.Text) + ".7z";
+
 
             if (!Directory.Exists(txtFolder.Text))
             {
@@ -70,34 +75,32 @@ namespace CloudPressGui
 
             //destination path for our future archive
             string archivePath = Path.Combine(txtFolder.Text, nameOfArchive);
-           
-           
 
-            
+
+
+
 
             //algorithm --->
 
-            //comrpess each file selected  and store in the archive file
-            foreach(string pathOfFile in PATHS_TO_COMPRESS){
-                //maybe create those files and change only their path
-                EncodeLZSS(pathOfFile, "");
-              
+            //create 7zip file
+            SevenZipCompressor compressor = new SevenZipCompressor();
+            
+            compressor.CompressionLevel = CompressionLevel.None;
 
-               
-            }
-            //make rar file with all the files
+            // compress the files 
+
+            SevenZipExtractor.SetLibraryPath(@"7z.dll");
+            compressor.CompressFiles(archivePath,PATHS_TO_COMPRESS);
             
 
 
+
+          
+           
 
 
 
         }
-
-
-
-
-
         private void addGui_Load(object sender, EventArgs e)
         {
 

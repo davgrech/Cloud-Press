@@ -24,3 +24,16 @@ C:\Users\Dolev\Desktop\Dolev\ashkelon-1206-compressor\CloudPressGui\CloudPressGu
 C:\Users\Dolev\Desktop\Dolev\ashkelon-1206-compressor\CloudPressGui\CloudPressGui\obj\x64\Debug\CloudPressGui.csproj.CoreCompileInputs.cache
 C:\Users\Dolev\Desktop\Dolev\ashkelon-1206-compressor\CloudPressGui\CloudPressGui\obj\x64\Debug\CloudPressGui.exe
 C:\Users\Dolev\Desktop\Dolev\ashkelon-1206-compressor\CloudPressGui\CloudPressGui\obj\x64\Debug\CloudPressGui.pdb
+C:\Users\user\Desktop\Dolev\magshimimProjects\Projects_2022\ashkelon-1206-compressor\CloudPressGui\CloudPressGui\bin\x64\Debug\SevenZipSharp.dll
+C:\Users\user\Desktop\Dolev\magshimimProjects\Projects_2022\ashkelon-1206-compressor\CloudPressGui\CloudPressGui\bin\x64\Debug\SharpCompress.dll
+C:\Users\user\Desktop\Dolev\magshimimProjects\Projects_2022\ashkelon-1206-compressor\CloudPressGui\CloudPressGui\bin\x64\Debug\System.Buffers.dll
+C:\Users\user\Desktop\Dolev\magshimimProjects\Projects_2022\ashkelon-1206-compressor\CloudPressGui\CloudPressGui\bin\x64\Debug\System.Memory.dll
+C:\Users\user\Desktop\Dolev\magshimimProjects\Projects_2022\ashkelon-1206-compressor\CloudPressGui\CloudPressGui\bin\x64\Debug\System.Numerics.Vectors.dll
+C:\Users\user\Desktop\Dolev\magshimimProjects\Projects_2022\ashkelon-1206-compressor\CloudPressGui\CloudPressGui\bin\x64\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\user\Desktop\Dolev\magshimimProjects\Projects_2022\ashkelon-1206-compressor\CloudPressGui\CloudPressGui\bin\x64\Debug\System.Text.Encoding.CodePages.dll
+C:\Users\user\Desktop\Dolev\magshimimProjects\Projects_2022\ashkelon-1206-compressor\CloudPressGui\CloudPressGui\bin\x64\Debug\System.Buffers.xml
+C:\Users\user\Desktop\Dolev\magshimimProjects\Projects_2022\ashkelon-1206-compressor\CloudPressGui\CloudPressGui\bin\x64\Debug\System.Memory.xml
+C:\Users\user\Desktop\Dolev\magshimimProjects\Projects_2022\ashkelon-1206-compressor\CloudPressGui\CloudPressGui\bin\x64\Debug\System.Numerics.Vectors.xml
+C:\Users\user\Desktop\Dolev\magshimimProjects\Projects_2022\ashkelon-1206-compressor\CloudPressGui\CloudPressGui\bin\x64\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\user\Desktop\Dolev\magshimimProjects\Projects_2022\ashkelon-1206-compressor\CloudPressGui\CloudPressGui\bin\x64\Debug\System.Text.Encoding.CodePages.xml
+C:\Users\user\Desktop\Dolev\magshimimProjects\Projects_2022\ashkelon-1206-compressor\CloudPressGui\CloudPressGui\obj\x64\Debug\CloudPressGui.csproj.CopyComplete
