@@ -12,6 +12,8 @@ using System.IO;
 using SharpCompress.Archives;
 using SharpCompress.Archives.Rar;
 using SevenZip;
+using static System.Net.WebRequestMethods;
+using SharpCompress.Archives.SevenZip;
 
 namespace CloudPressGui
 {
@@ -19,7 +21,7 @@ namespace CloudPressGui
 
     public partial class addGui : Form
     {
-        string[] PATHS_TO_COMPRESS = { "C:\\Users\\user\\Desktop\\abc.txt" , "C:\\Users\\user\\Desktop\\hu.txt" }; 
+        string[] PATHS_TO_COMPRESS = {@"C:\Users\Dolev\Desktop\abc.txt", @"C:\Users\Dolev\Desktop\lmao.txt" };
         //TODO: NEED TO IMPORT THE FUNCTION WITHOUT ERRORS
         [DllImport(@"C:\\Users\\user\\Desktop\\Dolev\\magshimimProjects\\Projects_2022\\ashkelon-1206-compressor\\dll_compression_decompression\\x64\\Debug\\dll_compression_decompression.dll", CallingConvention =  CallingConvention.Cdecl)]
         static extern void EncodeLZSS(string inFilePath, string outFilePath);
@@ -83,23 +85,29 @@ namespace CloudPressGui
             //algorithm --->
 
             //create 7zip file
-            SevenZipCompressor compressor = new SevenZipCompressor();
+        
             
-            compressor.CompressionLevel = CompressionLevel.None;
+           
 
             // compress the files 
 
             SevenZipExtractor.SetLibraryPath(@"7z.dll");
-            compressor.CompressFiles(archivePath,PATHS_TO_COMPRESS);
-            
+
+                
+
+      
+            ZipFiles(PATHS_TO_COMPRESS, archivePath);
 
 
 
-          
-           
 
-
-
+        }
+        public void ZipFiles(string[] filePaths, string outputFilePath, string password = null)
+        {
+            var tmp = new SevenZipCompressor();
+            tmp.CompressionLevel = CompressionLevel.None;
+            tmp.ScanOnlyWritable = true;
+            tmp.CompressFilesEncrypted(outputFilePath, password, filePaths);
         }
         private void addGui_Load(object sender, EventArgs e)
         {
