@@ -44,30 +44,28 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // txtArchiveName
             // 
-            this.txtArchiveName.Location = new System.Drawing.Point(16, 81);
-            this.txtArchiveName.Margin = new System.Windows.Forms.Padding(4);
+            this.txtArchiveName.Location = new System.Drawing.Point(12, 66);
             this.txtArchiveName.Name = "txtArchiveName";
-            this.txtArchiveName.Size = new System.Drawing.Size(424, 22);
+            this.txtArchiveName.Size = new System.Drawing.Size(319, 20);
             this.txtArchiveName.TabIndex = 0;
             // 
             // txtFolder
             // 
-            this.txtFolder.Location = new System.Drawing.Point(16, 162);
-            this.txtFolder.Margin = new System.Windows.Forms.Padding(4);
+            this.txtFolder.Location = new System.Drawing.Point(12, 132);
             this.txtFolder.Name = "txtFolder";
-            this.txtFolder.Size = new System.Drawing.Size(424, 22);
+            this.txtFolder.Size = new System.Drawing.Size(319, 20);
             this.txtFolder.TabIndex = 1;
             // 
             // fileBtn
             // 
-            this.fileBtn.Location = new System.Drawing.Point(449, 81);
-            this.fileBtn.Margin = new System.Windows.Forms.Padding(4);
+            this.fileBtn.Location = new System.Drawing.Point(337, 66);
             this.fileBtn.Name = "fileBtn";
-            this.fileBtn.Size = new System.Drawing.Size(100, 28);
+            this.fileBtn.Size = new System.Drawing.Size(75, 23);
             this.fileBtn.TabIndex = 2;
             this.fileBtn.Text = "Browse...";
             this.fileBtn.UseVisualStyleBackColor = true;
@@ -75,10 +73,9 @@
             // 
             // folderBtn
             // 
-            this.folderBtn.Location = new System.Drawing.Point(449, 162);
-            this.folderBtn.Margin = new System.Windows.Forms.Padding(4);
+            this.folderBtn.Location = new System.Drawing.Point(337, 132);
             this.folderBtn.Name = "folderBtn";
-            this.folderBtn.Size = new System.Drawing.Size(100, 28);
+            this.folderBtn.Size = new System.Drawing.Size(75, 23);
             this.folderBtn.TabIndex = 3;
             this.folderBtn.Text = "Browse...";
             this.folderBtn.UseVisualStyleBackColor = true;
@@ -87,20 +84,18 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(16, 62);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(12, 50);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(89, 16);
+            this.label1.Size = new System.Drawing.Size(72, 13);
             this.label1.TabIndex = 4;
             this.label1.Text = "Archive name";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(16, 143);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(12, 116);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(75, 16);
+            this.label2.Size = new System.Drawing.Size(60, 13);
             this.label2.TabIndex = 5;
             this.label2.Text = "Folder path";
             // 
@@ -122,10 +117,9 @@
             "256MB",
             "512MB",
             "1024MB"});
-            this.comboBox1.Location = new System.Drawing.Point(33, 265);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(4);
+            this.comboBox1.Location = new System.Drawing.Point(25, 215);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(223, 24);
+            this.comboBox1.Size = new System.Drawing.Size(168, 21);
             this.comboBox1.TabIndex = 7;
             // 
             // comboBox2
@@ -137,18 +131,16 @@
             "Normal",
             "Fast",
             "Good"});
-            this.comboBox2.Location = new System.Drawing.Point(33, 326);
-            this.comboBox2.Margin = new System.Windows.Forms.Padding(4);
+            this.comboBox2.Location = new System.Drawing.Point(25, 265);
             this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(223, 24);
+            this.comboBox2.Size = new System.Drawing.Size(168, 21);
             this.comboBox2.TabIndex = 8;
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(33, 374);
-            this.button3.Margin = new System.Windows.Forms.Padding(4);
+            this.button3.Location = new System.Drawing.Point(25, 304);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(224, 28);
+            this.button3.Size = new System.Drawing.Size(168, 23);
             this.button3.TabIndex = 9;
             this.button3.Text = "Set password...";
             this.button3.UseVisualStyleBackColor = true;
@@ -160,18 +152,17 @@
             "Delete files after archiving",
             "Create solid archive",
             "Lock archive"});
-            this.checkedListBox1.Location = new System.Drawing.Point(329, 287);
-            this.checkedListBox1.Margin = new System.Windows.Forms.Padding(4);
+            this.checkedListBox1.Location = new System.Drawing.Point(247, 233);
             this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(219, 106);
+            this.checkedListBox1.Size = new System.Drawing.Size(165, 79);
             this.checkedListBox1.TabIndex = 10;
+            this.checkedListBox1.SelectedIndexChanged += new System.EventHandler(this.checkedListBox1_SelectedIndexChanged);
             // 
             // compress
             // 
-            this.compress.Location = new System.Drawing.Point(233, 449);
-            this.compress.Margin = new System.Windows.Forms.Padding(4);
+            this.compress.Location = new System.Drawing.Point(175, 365);
             this.compress.Name = "compress";
-            this.compress.Size = new System.Drawing.Size(100, 28);
+            this.compress.Size = new System.Drawing.Size(75, 23);
             this.compress.TabIndex = 11;
             this.compress.Text = "OK";
             this.compress.UseVisualStyleBackColor = true;
@@ -179,20 +170,18 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(341, 449);
-            this.button5.Margin = new System.Windows.Forms.Padding(4);
+            this.button5.Location = new System.Drawing.Point(256, 365);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(100, 28);
+            this.button5.Size = new System.Drawing.Size(75, 23);
             this.button5.TabIndex = 12;
             this.button5.Text = "Cancel";
             this.button5.UseVisualStyleBackColor = true;
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(449, 449);
-            this.button6.Margin = new System.Windows.Forms.Padding(4);
+            this.button6.Location = new System.Drawing.Point(337, 365);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(100, 28);
+            this.button6.Size = new System.Drawing.Size(75, 23);
             this.button6.TabIndex = 13;
             this.button6.Text = "Help";
             this.button6.UseVisualStyleBackColor = true;
@@ -200,38 +189,46 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(33, 245);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Location = new System.Drawing.Point(25, 199);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(94, 16);
+            this.label3.Size = new System.Drawing.Size(75, 13);
             this.label3.TabIndex = 14;
             this.label3.Text = "Dictionary size";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(33, 306);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Location = new System.Drawing.Point(25, 249);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(135, 16);
+            this.label4.Size = new System.Drawing.Size(105, 13);
             this.label4.TabIndex = 15;
             this.label4.Text = "Compression method";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(325, 245);
-            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label5.Location = new System.Drawing.Point(244, 199);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(109, 16);
+            this.label5.Size = new System.Drawing.Size(88, 13);
             this.label5.TabIndex = 16;
             this.label5.Text = "Archiving options";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(247, 327);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(165, 23);
+            this.button1.TabIndex = 17;
+            this.button1.Text = "Set Password...";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // addGui
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(592, 494);
+            this.ClientSize = new System.Drawing.Size(444, 401);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -248,7 +245,6 @@
             this.Controls.Add(this.fileBtn);
             this.Controls.Add(this.txtFolder);
             this.Controls.Add(this.txtArchiveName);
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "addGui";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.addGui_Load);
@@ -275,6 +271,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button button1;
     }
 }
 

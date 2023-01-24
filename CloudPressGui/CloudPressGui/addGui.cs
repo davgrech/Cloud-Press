@@ -113,5 +113,16 @@ namespace CloudPressGui
         {
 
         }
+
+        private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //check if lock archive is checked
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            // pop a form asking for a password and a repeater
+
+        }
     }
 }
