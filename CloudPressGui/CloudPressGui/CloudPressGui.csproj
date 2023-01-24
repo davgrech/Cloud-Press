@@ -90,6 +90,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EnterPassword.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EnterPassword.Designer.cs">
+      <DependentUpon>EnterPassword.cs</DependentUpon>
+    </Compile>
     <Compile Include="extractGui.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -112,6 +118,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="addGui.resx">
       <DependentUpon>addGui.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EnterPassword.resx">
+      <DependentUpon>EnterPassword.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="extractGui.resx">
       <DependentUpon>extractGui.cs</DependentUpon>
