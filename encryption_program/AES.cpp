@@ -25,7 +25,7 @@ unsigned char* AES::EncryptECB(const unsigned char in[], unsigned int inLen,
     if (inLen % blockBytesLen != 0) //pad string so we can encrypt it with the a block in the size of blockBytesLen
     {
         std::string appending_str;
-        for (int i = 0; i < inLen; i++)
+        for (int i = 0; i < inLen; i++) // copy string
         {
             appending_str += in[i];
 
@@ -33,10 +33,9 @@ unsigned char* AES::EncryptECB(const unsigned char in[], unsigned int inLen,
         while (inLen % blockBytesLen != 0)
         {
             inLen += 1;
-            appending_str += " ";
+            appending_str += "z"; // pad the string
         }
         in = reinterpret_cast<const unsigned char*>(appending_str.c_str()); 
-        ////////////////////////could be a problem here
 
     }
     CheckLength(inLen);
@@ -48,12 +47,12 @@ unsigned char* AES::EncryptECB(const unsigned char in[], unsigned int inLen,
     }
 
     delete[] roundKeys;
-    std::cout << out << std::endl;
     return out;
 }
 
 unsigned char* AES::DecryptECB(const unsigned char in[], unsigned int inLen,
     const unsigned char key[]) {
+
     CheckLength(inLen);
     unsigned char* out = new unsigned char[inLen];
     unsigned char* roundKeys = new unsigned char[4 * Nb * (Nr + 1)];
@@ -65,7 +64,6 @@ unsigned char* AES::DecryptECB(const unsigned char in[], unsigned int inLen,
     delete[] roundKeys;
     
     return out;
-    ////////////////////////or here
 }
 
 
