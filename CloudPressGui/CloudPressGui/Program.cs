@@ -17,8 +17,10 @@ namespace CloudPressGui
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
            
+           Application.Run(new MainMenu(@"C:\Users\user\Desktop\"));
+            
            
-            Application.Run(new MainMenu());
+            
         }
     }
 }

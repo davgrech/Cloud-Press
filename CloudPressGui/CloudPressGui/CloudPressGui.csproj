@@ -91,6 +91,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="NativeMethods.h" />
+    <Compile Include="ArchiveCreator.cs" />
     <Compile Include="extractGui.cs">
       <SubType>Form</SubType>
     </Compile>

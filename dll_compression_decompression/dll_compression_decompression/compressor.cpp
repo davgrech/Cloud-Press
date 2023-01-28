@@ -90,9 +90,9 @@ void EncodeLZSS(char* inFilePath, char* outFilePath)
     FILE* inFile;
     FILE* outFile;
     errno_t error_codeA, error_codeB;
-    error_codeA = fopen_s(&inFile, inFilePath, "r");
+    error_codeA = fopen_s(&inFile, inFilePath, "rb");
 
-    error_codeB = fopen_s(&outFile, outFilePath, "w+");
+    error_codeB = fopen_s(&outFile, outFilePath, "wb");
     
     if (error_codeA != 0 || error_codeB != 0)
     {
