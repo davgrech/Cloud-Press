@@ -56,6 +56,7 @@
             this.txtPath = new System.Windows.Forms.TextBox();
             this.browserBtn = new System.Windows.Forms.Button();
             this.webBrowser = new System.Windows.Forms.WebBrowser();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -70,7 +71,7 @@
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1067, 28);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -83,37 +84,37 @@
             this.selectAllToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 24);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // openArchiveToolStripMenuItem
             // 
             this.openArchiveToolStripMenuItem.Name = "openArchiveToolStripMenuItem";
-            this.openArchiveToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.openArchiveToolStripMenuItem.Size = new System.Drawing.Size(235, 26);
             this.openArchiveToolStripMenuItem.Text = "Open archive";
             // 
             // saveArchiveCopyAsToolStripMenuItem
             // 
             this.saveArchiveCopyAsToolStripMenuItem.Name = "saveArchiveCopyAsToolStripMenuItem";
-            this.saveArchiveCopyAsToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.saveArchiveCopyAsToolStripMenuItem.Size = new System.Drawing.Size(235, 26);
             this.saveArchiveCopyAsToolStripMenuItem.Text = "Save archive copy as";
             // 
             // changeDriveToolStripMenuItem
             // 
             this.changeDriveToolStripMenuItem.Name = "changeDriveToolStripMenuItem";
-            this.changeDriveToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.changeDriveToolStripMenuItem.Size = new System.Drawing.Size(235, 26);
             this.changeDriveToolStripMenuItem.Text = "Set  defualt password";
             // 
             // selectAllToolStripMenuItem
             // 
             this.selectAllToolStripMenuItem.Name = "selectAllToolStripMenuItem";
-            this.selectAllToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.selectAllToolStripMenuItem.Size = new System.Drawing.Size(235, 26);
             this.selectAllToolStripMenuItem.Text = "Select all";
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(235, 26);
             this.exitToolStripMenuItem.Text = "Exit";
             // 
             // commandsToolStripMenuItem
@@ -123,25 +124,25 @@
             this.extractToASpecifiedFolderToolStripMenuItem,
             this.lookArchiveToolStripMenuItem});
             this.commandsToolStripMenuItem.Name = "commandsToolStripMenuItem";
-            this.commandsToolStripMenuItem.Size = new System.Drawing.Size(81, 20);
+            this.commandsToolStripMenuItem.Size = new System.Drawing.Size(98, 24);
             this.commandsToolStripMenuItem.Text = "Commands";
             // 
             // addFilesToArchiveToolStripMenuItem
             // 
             this.addFilesToArchiveToolStripMenuItem.Name = "addFilesToArchiveToolStripMenuItem";
-            this.addFilesToArchiveToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+            this.addFilesToArchiveToolStripMenuItem.Size = new System.Drawing.Size(275, 26);
             this.addFilesToArchiveToolStripMenuItem.Text = "Add files to archive";
             // 
             // extractToASpecifiedFolderToolStripMenuItem
             // 
             this.extractToASpecifiedFolderToolStripMenuItem.Name = "extractToASpecifiedFolderToolStripMenuItem";
-            this.extractToASpecifiedFolderToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+            this.extractToASpecifiedFolderToolStripMenuItem.Size = new System.Drawing.Size(275, 26);
             this.extractToASpecifiedFolderToolStripMenuItem.Text = "Extract to a specified folder";
             // 
             // lookArchiveToolStripMenuItem
             // 
             this.lookArchiveToolStripMenuItem.Name = "lookArchiveToolStripMenuItem";
-            this.lookArchiveToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+            this.lookArchiveToolStripMenuItem.Size = new System.Drawing.Size(275, 26);
             this.lookArchiveToolStripMenuItem.Text = "Look archive";
             // 
             // toolsToolStripMenuItem
@@ -150,19 +151,19 @@
             this.findFilesToolStripMenuItem,
             this.showInfromationToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(58, 24);
             this.toolsToolStripMenuItem.Text = "Tools";
             // 
             // findFilesToolStripMenuItem
             // 
             this.findFilesToolStripMenuItem.Name = "findFilesToolStripMenuItem";
-            this.findFilesToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.findFilesToolStripMenuItem.Size = new System.Drawing.Size(210, 26);
             this.findFilesToolStripMenuItem.Text = "Find files";
             // 
             // showInfromationToolStripMenuItem
             // 
             this.showInfromationToolStripMenuItem.Name = "showInfromationToolStripMenuItem";
-            this.showInfromationToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.showInfromationToolStripMenuItem.Size = new System.Drawing.Size(210, 26);
             this.showInfromationToolStripMenuItem.Text = "Show infromation";
             // 
             // optionsToolStripMenuItem
@@ -170,13 +171,13 @@
             this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.settingsToolStripMenuItem});
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(75, 24);
             this.optionsToolStripMenuItem.Text = "Options";
             // 
             // settingsToolStripMenuItem
             // 
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(145, 26);
             this.settingsToolStripMenuItem.Text = "Settings";
             // 
             // helpToolStripMenuItem
@@ -184,74 +185,81 @@
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.helpTopicsToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(55, 24);
             this.helpToolStripMenuItem.Text = "Help";
             // 
             // helpTopicsToolStripMenuItem
             // 
             this.helpTopicsToolStripMenuItem.Name = "helpTopicsToolStripMenuItem";
-            this.helpTopicsToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.helpTopicsToolStripMenuItem.Size = new System.Drawing.Size(168, 26);
             this.helpTopicsToolStripMenuItem.Text = "Help topics";
             // 
             // ad
             // 
-            this.ad.Location = new System.Drawing.Point(13, 27);
+            this.ad.Location = new System.Drawing.Point(17, 33);
+            this.ad.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.ad.Name = "ad";
-            this.ad.Size = new System.Drawing.Size(60, 65);
+            this.ad.Size = new System.Drawing.Size(80, 80);
             this.ad.TabIndex = 1;
             this.ad.Text = "Add";
             this.ad.UseVisualStyleBackColor = true;
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(79, 27);
+            this.button2.Location = new System.Drawing.Point(105, 33);
+            this.button2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(60, 65);
+            this.button2.Size = new System.Drawing.Size(80, 80);
             this.button2.TabIndex = 2;
             this.button2.Text = "Extract";
             this.button2.UseVisualStyleBackColor = true;
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(145, 27);
+            this.button3.Location = new System.Drawing.Point(193, 33);
+            this.button3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(60, 65);
+            this.button3.Size = new System.Drawing.Size(80, 80);
             this.button3.TabIndex = 3;
             this.button3.Text = "Delete";
             this.button3.UseVisualStyleBackColor = true;
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(211, 27);
+            this.button4.Location = new System.Drawing.Point(281, 33);
+            this.button4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(60, 65);
+            this.button4.Size = new System.Drawing.Size(80, 80);
             this.button4.TabIndex = 4;
             this.button4.Text = "Find";
             this.button4.UseVisualStyleBackColor = true;
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(277, 27);
+            this.button5.Location = new System.Drawing.Point(369, 33);
+            this.button5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(60, 65);
+            this.button5.Size = new System.Drawing.Size(80, 80);
             this.button5.TabIndex = 5;
             this.button5.Text = "Info";
             this.button5.UseVisualStyleBackColor = true;
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(343, 27);
+            this.button6.Location = new System.Drawing.Point(457, 33);
+            this.button6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(60, 65);
+            this.button6.Size = new System.Drawing.Size(80, 80);
             this.button6.TabIndex = 6;
             this.button6.Text = "PRESS";
             this.button6.UseVisualStyleBackColor = true;
             // 
             // backBtn
             // 
-            this.backBtn.Location = new System.Drawing.Point(13, 98);
+            this.backBtn.Location = new System.Drawing.Point(17, 121);
+            this.backBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.backBtn.Name = "backBtn";
-            this.backBtn.Size = new System.Drawing.Size(60, 23);
+            this.backBtn.Size = new System.Drawing.Size(80, 28);
             this.backBtn.TabIndex = 7;
             this.backBtn.Text = "Back";
             this.backBtn.UseVisualStyleBackColor = true;
@@ -259,16 +267,18 @@
             // 
             // txtPath
             // 
-            this.txtPath.Location = new System.Drawing.Point(79, 101);
+            this.txtPath.Location = new System.Drawing.Point(105, 124);
+            this.txtPath.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtPath.Name = "txtPath";
-            this.txtPath.Size = new System.Drawing.Size(663, 20);
+            this.txtPath.Size = new System.Drawing.Size(883, 22);
             this.txtPath.TabIndex = 8;
             // 
             // browserBtn
             // 
-            this.browserBtn.Location = new System.Drawing.Point(748, 101);
+            this.browserBtn.Location = new System.Drawing.Point(997, 124);
+            this.browserBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.browserBtn.Name = "browserBtn";
-            this.browserBtn.Size = new System.Drawing.Size(51, 22);
+            this.browserBtn.Size = new System.Drawing.Size(68, 27);
             this.browserBtn.TabIndex = 9;
             this.browserBtn.Text = "open...";
             this.browserBtn.UseVisualStyleBackColor = true;
@@ -279,17 +289,23 @@
             this.webBrowser.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.webBrowser.Location = new System.Drawing.Point(0, 127);
-            this.webBrowser.MinimumSize = new System.Drawing.Size(20, 20);
+            this.webBrowser.Location = new System.Drawing.Point(0, 156);
+            this.webBrowser.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.webBrowser.MinimumSize = new System.Drawing.Size(27, 25);
             this.webBrowser.Name = "webBrowser";
-            this.webBrowser.Size = new System.Drawing.Size(800, 325);
+            this.webBrowser.Size = new System.Drawing.Size(1067, 400);
             this.webBrowser.TabIndex = 10;
+            this.webBrowser.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.webBrowser_DocumentCompleted);
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
             // 
             // MainMenu
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1067, 554);
             this.Controls.Add(this.webBrowser);
             this.Controls.Add(this.browserBtn);
             this.Controls.Add(this.txtPath);
@@ -302,6 +318,7 @@
             this.Controls.Add(this.ad);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "MainMenu";
             this.Text = "MainMenu";
             this.menuStrip1.ResumeLayout(false);
@@ -341,5 +358,6 @@
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpTopicsToolStripMenuItem;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }

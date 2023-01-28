@@ -21,7 +21,7 @@ namespace CloudPressGui
 
     public partial class addGui : Form
     {
-        string[] PATHS_TO_COMPRESS = {@"C:\Users\Dolev\Desktop\abc.txt", @"C:\Users\Dolev\Desktop\lmao.txt" };
+        string[] PATHS_TO_COMPRESS = { @"C:\Users\user\Desktop\abc.txt", @"C:\Users\user\Desktop\lmao.txt" };
         //TODO: NEED TO IMPORT THE FUNCTION WITHOUT ERRORS
         [DllImport(@"C:\\Users\\user\\Desktop\\Dolev\\magshimimProjects\\Projects_2022\\ashkelon-1206-compressor\\dll_compression_decompression\\x64\\Debug\\dll_compression_decompression.dll", CallingConvention =  CallingConvention.Cdecl)]
         static extern void EncodeLZSS(string inFilePath, string outFilePath);
@@ -33,7 +33,17 @@ namespace CloudPressGui
         {
             InitializeComponent();
             //all the passes the user selected to add
-
+           if(paths.Length ==0)
+            {
+                txtArchiveName.Text = "hagagagaga";
+            }
+            else
+            {
+                txtArchiveName.Text = paths[0];
+            }
+           
+            
+           
             //PATHS_TO_COMPRESS = paths;
         }
 
@@ -91,7 +101,7 @@ namespace CloudPressGui
 
             // compress the files 
 
-            SevenZipExtractor.SetLibraryPath(@"7z.dll");
+            //SevenZipExtractor.SetLibraryPath(@"7z.dll");
 
                 
 

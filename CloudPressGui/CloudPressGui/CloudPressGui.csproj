@@ -90,6 +90,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="NativeMethods.h" />
     <Compile Include="extractGui.cs">
       <SubType>Form</SubType>
     </Compile>

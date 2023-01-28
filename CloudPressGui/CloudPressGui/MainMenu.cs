@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace CloudPressGui
 {
     public partial class MainMenu : Form
@@ -29,6 +30,8 @@ namespace CloudPressGui
                 {
                     webBrowser.Url = new Uri(dialog.SelectedPath);
                     txtPath.Text = dialog.SelectedPath;
+
+                    
                 }
             }
         }
@@ -37,8 +40,12 @@ namespace CloudPressGui
         {
             if(webBrowser.CanGoBack)
                 webBrowser.GoBack();
+            
         }
 
-      
+        private void webBrowser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
+
+        }
     }
 }
