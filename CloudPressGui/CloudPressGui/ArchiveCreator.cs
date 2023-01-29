@@ -38,7 +38,7 @@ namespace CloudPressGui
                 File.Create(tempOutputPath); // create the temp file
 
                 EncodeLZSS(file, tempOutputPath);
-                Thread.Sleep(10000);
+              
                 
 
 
