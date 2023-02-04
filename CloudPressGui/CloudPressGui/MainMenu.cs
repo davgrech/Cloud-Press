@@ -44,7 +44,8 @@ namespace CloudPressGui
         {
             TreeNode rootNode;
 
-            DirectoryInfo info = new DirectoryInfo(SELECTED_PATH);
+            //DirectoryInfo info = new DirectoryInfo(SELECTED_PATH);
+            DirectoryInfo info = new DirectoryInfo(@"C:\Users\Dolev\Desktop");
             if (info.Exists)
             {
                 rootNode = new TreeNode(info.Name);
@@ -163,8 +164,10 @@ namespace CloudPressGui
         private List<string> getPathsToArchiveFromGui()
         {
             List<string> paths = new List<string>();
-            
-            PATH_OF_ARCHIVE = @"C:\Users\user\" + treeView1.SelectedNode.FullPath;
+        
+
+        PATH_OF_ARCHIVE = @"C:\Users\Dolev\" + treeView1.SelectedNode.FullPath;
+          
             if (PATH_OF_ARCHIVE == null)
             {
                 return new List<string>();

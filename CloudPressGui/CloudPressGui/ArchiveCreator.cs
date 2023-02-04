@@ -35,10 +35,13 @@ namespace CloudPressGui
             foreach (string file in pathsToEncode)
             {
                 string tempOutputPath = Path.Combine(newFolderPath, Path.GetFileName(file));
-                File.Create(tempOutputPath); // create the temp file
+            
 
                 EncodeLZSS(file, tempOutputPath);
               
+
+
+
                 
 
 
@@ -48,7 +51,7 @@ namespace CloudPressGui
             pathOfArchive = Path.Combine(pathOfArchive, Path.GetFileNameWithoutExtension(pathOfArchive)) + ".7z";
 
 
-
+     
       
             ZipFiles(Directory.GetFiles(newFolderPath), pathOfArchive);
          
