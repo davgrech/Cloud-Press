@@ -80,7 +80,7 @@
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1079, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1079, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -93,37 +93,37 @@
             this.selectAllToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 24);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // openArchiveToolStripMenuItem
             // 
             this.openArchiveToolStripMenuItem.Name = "openArchiveToolStripMenuItem";
-            this.openArchiveToolStripMenuItem.Size = new System.Drawing.Size(235, 26);
+            this.openArchiveToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
             this.openArchiveToolStripMenuItem.Text = "Open archive";
             // 
             // saveArchiveCopyAsToolStripMenuItem
             // 
             this.saveArchiveCopyAsToolStripMenuItem.Name = "saveArchiveCopyAsToolStripMenuItem";
-            this.saveArchiveCopyAsToolStripMenuItem.Size = new System.Drawing.Size(235, 26);
+            this.saveArchiveCopyAsToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
             this.saveArchiveCopyAsToolStripMenuItem.Text = "Save archive copy as";
             // 
             // changeDriveToolStripMenuItem
             // 
             this.changeDriveToolStripMenuItem.Name = "changeDriveToolStripMenuItem";
-            this.changeDriveToolStripMenuItem.Size = new System.Drawing.Size(235, 26);
+            this.changeDriveToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
             this.changeDriveToolStripMenuItem.Text = "Set  defualt password";
             // 
             // selectAllToolStripMenuItem
             // 
             this.selectAllToolStripMenuItem.Name = "selectAllToolStripMenuItem";
-            this.selectAllToolStripMenuItem.Size = new System.Drawing.Size(235, 26);
+            this.selectAllToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
             this.selectAllToolStripMenuItem.Text = "Select all";
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(235, 26);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             // 
             // commandsToolStripMenuItem
@@ -133,25 +133,25 @@
             this.extractToASpecifiedFolderToolStripMenuItem,
             this.lookArchiveToolStripMenuItem});
             this.commandsToolStripMenuItem.Name = "commandsToolStripMenuItem";
-            this.commandsToolStripMenuItem.Size = new System.Drawing.Size(98, 24);
+            this.commandsToolStripMenuItem.Size = new System.Drawing.Size(81, 20);
             this.commandsToolStripMenuItem.Text = "Commands";
             // 
             // addFilesToArchiveToolStripMenuItem
             // 
             this.addFilesToArchiveToolStripMenuItem.Name = "addFilesToArchiveToolStripMenuItem";
-            this.addFilesToArchiveToolStripMenuItem.Size = new System.Drawing.Size(275, 26);
+            this.addFilesToArchiveToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
             this.addFilesToArchiveToolStripMenuItem.Text = "Add files to archive";
             // 
             // extractToASpecifiedFolderToolStripMenuItem
             // 
             this.extractToASpecifiedFolderToolStripMenuItem.Name = "extractToASpecifiedFolderToolStripMenuItem";
-            this.extractToASpecifiedFolderToolStripMenuItem.Size = new System.Drawing.Size(275, 26);
+            this.extractToASpecifiedFolderToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
             this.extractToASpecifiedFolderToolStripMenuItem.Text = "Extract to a specified folder";
             // 
             // lookArchiveToolStripMenuItem
             // 
             this.lookArchiveToolStripMenuItem.Name = "lookArchiveToolStripMenuItem";
-            this.lookArchiveToolStripMenuItem.Size = new System.Drawing.Size(275, 26);
+            this.lookArchiveToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
             this.lookArchiveToolStripMenuItem.Text = "Look archive";
             // 
             // toolsToolStripMenuItem
@@ -160,19 +160,19 @@
             this.findFilesToolStripMenuItem,
             this.showInfromationToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(58, 24);
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
             this.toolsToolStripMenuItem.Text = "Tools";
             // 
             // findFilesToolStripMenuItem
             // 
             this.findFilesToolStripMenuItem.Name = "findFilesToolStripMenuItem";
-            this.findFilesToolStripMenuItem.Size = new System.Drawing.Size(210, 26);
+            this.findFilesToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.findFilesToolStripMenuItem.Text = "Find files";
             // 
             // showInfromationToolStripMenuItem
             // 
             this.showInfromationToolStripMenuItem.Name = "showInfromationToolStripMenuItem";
-            this.showInfromationToolStripMenuItem.Size = new System.Drawing.Size(210, 26);
+            this.showInfromationToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.showInfromationToolStripMenuItem.Text = "Show infromation";
             // 
             // optionsToolStripMenuItem
@@ -180,13 +180,13 @@
             this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.settingsToolStripMenuItem});
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(75, 24);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.optionsToolStripMenuItem.Text = "Options";
             // 
             // settingsToolStripMenuItem
             // 
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(145, 26);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.settingsToolStripMenuItem.Text = "Settings";
             // 
             // helpToolStripMenuItem
@@ -194,13 +194,13 @@
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.helpTopicsToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(55, 24);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "Help";
             // 
             // helpTopicsToolStripMenuItem
             // 
             this.helpTopicsToolStripMenuItem.Name = "helpTopicsToolStripMenuItem";
-            this.helpTopicsToolStripMenuItem.Size = new System.Drawing.Size(168, 26);
+            this.helpTopicsToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.helpTopicsToolStripMenuItem.Text = "Help topics";
             // 
             // ad
@@ -301,6 +301,7 @@
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             this.imageList1.Images.SetKeyName(0, "folder.png");
             this.imageList1.Images.SetKeyName(1, "Text.png");
+            this.imageList1.Images.SetKeyName(2, "Zip.jpg");
             // 
             // listView1
             // 
@@ -318,6 +319,7 @@
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
             this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            this.listView1.DoubleClick += new System.EventHandler(this.listView1_DoubleClick);
             // 
             // MainMenu
             // 

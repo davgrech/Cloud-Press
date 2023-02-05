@@ -104,6 +104,7 @@
     <Compile Include="addGui.Designer.cs">
       <DependentUpon>addGui.cs</DependentUpon>
     </Compile>
+    <Compile Include="fileTypeMap.cs" />
     <Compile Include="MainMenu.cs">
       <SubType>Form</SubType>
     </Compile>
