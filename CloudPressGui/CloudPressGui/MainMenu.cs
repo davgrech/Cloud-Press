@@ -21,6 +21,7 @@ namespace CloudPressGui
         const string STARTERPOSITION = @"C:\Users\user\";
         string SELECTED_PATH;
         string PATH_OF_ARCHIVE;
+        bool IS_IN_ARCHIVE_MODE = false;
 
         public MainMenu(string PATH)
         {
@@ -86,6 +87,10 @@ namespace CloudPressGui
             DirectoryInfo nodeDirInfo = (DirectoryInfo)newSelected.Tag;
             ListViewItem.ListViewSubItem[] subItems;
             ListViewItem item = null;
+
+
+
+            IS_IN_ARCHIVE_MODE = false;
 
             foreach (DirectoryInfo dir in nodeDirInfo.GetDirectories())
             {
@@ -164,6 +169,8 @@ namespace CloudPressGui
             List<string> listOfPaths = getPathsToArchiveFromGui();
 
             //create + compress the files 
+            if (PATH_OF_ARCHIVE == "") return;
+
             ArchiveCreator.createArchive(PATH_OF_ARCHIVE, listOfPaths);
 
         }
@@ -203,10 +210,10 @@ namespace CloudPressGui
             }
 
             //global variable to store the path of slected archive
-            PATH_OF_ARCHIVE = STARTERPOSITION + treeView1.SelectedNode.FullPath;
+            string pathOfSelectedWithoutName = STARTERPOSITION + treeView1.SelectedNode.FullPath;
 
             //selected path
-            string pathOfSelected = Path.Combine(PATH_OF_ARCHIVE, fileSelectedName);
+            string pathOfSelected = Path.Combine(pathOfSelectedWithoutName, fileSelectedName);
             if (Path.GetExtension(pathOfSelected) == ".7z")
             {
                 PATH_OF_ARCHIVE = pathOfSelected;
@@ -216,21 +223,34 @@ namespace CloudPressGui
                     putArchiveFilesToListView(extractor);
 
 
+                    //determine im in archive mode = double click file it opens with decode
+
+                    IS_IN_ARCHIVE_MODE = true;
+
+
 
                 }
             }
             else
             {
+                if(IS_IN_ARCHIVE_MODE)
+                {
+                    ArchiveCreator.decompressFileAndOpen(pathOfSelected, PATH_OF_ARCHIVE);
+                }
+                else
+                {
+                    Process process = new Process();
+                    process.StartInfo.FileName = pathOfSelected;
+                    process.Start();
+                }
                 //runs the selected process
-                Process process = new Process();
-                process.StartInfo.FileName = pathOfSelected;
-                process.Start();
+               
             }
 
         }
         private void putArchiveFilesToListView(SevenZipExtractor extractor)
         {
-            listView1.Items.Clear();
+            listView1.Items.Clear(); //delete all the items from listview
             for (int i = 0; i < extractor.ArchiveFileData.Count; i++)
             {
               

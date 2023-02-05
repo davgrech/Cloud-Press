@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 using SevenZip;
-
+using System.Diagnostics;
 
 namespace CloudPressGui
 {
@@ -16,8 +16,12 @@ namespace CloudPressGui
 
        
         static string TEMP_FOLDER_OF_PROJECT = Path.Combine(Environment.CurrentDirectory, "temp");
+        static string VIEW_FOLDER_OF_PROJECT = Path.Combine(TEMP_FOLDER_OF_PROJECT, "temp");
         [DllImport(@"dll_compression_decompression.dll", CallingConvention = CallingConvention.Cdecl)]
         static extern void EncodeLZSS(string inFilePath, string outFilePath);
+
+        [DllImport(@"dll_compression_decompression.dll", CallingConvention = CallingConvention.Cdecl)]
+        static extern void DecodeLZSS(string inFilePath, string outFilePath);
 
         public static void ZipFiles(string[] filePaths, string outputFilePath, string password = null)
         {
@@ -41,11 +45,6 @@ namespace CloudPressGui
                 EncodeLZSS(filePath, tempOutputPath);
               
 
-
-
-                
-
-
             }
             //after finish the temp folder
             //
@@ -54,7 +53,7 @@ namespace CloudPressGui
 
      
       
-            ZipFiles(Directory.GetFiles(TEMP_FOLDER_OF_PROJECT), pathOfArchive);
+            ZipFiles(Directory.GetFiles(TEMP_FOLDER_OF_PROJECT), pathOfArchive); // get the files from temp folder and add it to archive 
 
 
 
@@ -67,56 +66,62 @@ namespace CloudPressGui
         }
         /*
          this function exists to decompress a specific file so the person can view it whether he clicked an archive 
-
         */
-        public static  void decompressFile(string pathExract, string pathToArchive)
+        public static  void decompressFileAndOpen(string pathExract, string pathToArchive)
         {
 
             //create our temp directory 
             createDirectory(TEMP_FOLDER_OF_PROJECT);
 
-            Directory.CreateDirectory(TEMP_FOLDER_OF_PROJECT);
+            createDirectory(VIEW_FOLDER_OF_PROJECT);
 
+
+            
+            string tempOutputPath = Path.Combine(TEMP_FOLDER_OF_PROJECT, Path.GetFileName(pathExract));
             using (SevenZipExtractor extractor = new SevenZipExtractor(pathToArchive))
             {
-                foreach (ArchiveFileInfo fileToExtract in extractor.ArchiveFileData)
+                using (Stream stream = new FileStream(tempOutputPath, FileMode.Create))
                 {
-
-                    if (fileToExtract.FileName.Equals(pathExract))
-                    {
-                        
-                        //TODO:: Extract
-                        
-
-                        string tempOutputPath = Path.Combine(TEMP_FOLDER_OF_PROJECT, fileToExtract.FileName);
-
-                        EncodeLZSS(pathExract, tempOutputPath);
-
-
-
-                       
-                        break;
-                    }
-                   
+                    extractor.ExtractFile(Path.GetFileName(pathExract), stream);
                 }
+                
             }
 
-            deleteDirectory(TEMP_FOLDER_OF_PROJECT);
+
+            string viewFile = Path.Combine(VIEW_FOLDER_OF_PROJECT, Path.GetFileName(pathExract));
+
+
+            DecodeLZSS(tempOutputPath, viewFile);
+
+            Process process = new Process();
+            process.StartInfo.FileName = viewFile;
+            process.EnableRaisingEvents = true;
+            process.Exited += Process_Exited;
+            process.Start();
+            
+
+        
            
 
+        }
+        static void Process_Exited(object sender, EventArgs e)
+        {
+            deleteDirectory(VIEW_FOLDER_OF_PROJECT);
+            deleteDirectory(TEMP_FOLDER_OF_PROJECT);
+           
         }
 
         private static void deleteDirectory(string folderPath)
         {
-            if (Directory.Exists(TEMP_FOLDER_OF_PROJECT))
+            if (Directory.Exists(folderPath))
             {
-                Directory.Delete(TEMP_FOLDER_OF_PROJECT, true);
+                Directory.Delete(folderPath, true);
             }
           
         }
         private static  void createDirectory(string folderPath)
         {
-            Directory.CreateDirectory(TEMP_FOLDER_OF_PROJECT);
+            Directory.CreateDirectory(folderPath);
         }
 
 

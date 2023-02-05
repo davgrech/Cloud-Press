@@ -34,7 +34,10 @@ typedef enum
 unsigned char slidingWindow[WINDOW_SIZE];
 unsigned char uncodedLookahead[MAX_CODED];
 
-encoded_string_t findMatch(int windowHead, int uncodedHead)
+
+encoded_string_t findMatch(int windowHead, int uncodedHead);
+
+encoded_string_t FindMatch(int windowHead, int uncodedHead)
 {
     encoded_string_t matchData;
     int i, j;
@@ -51,23 +54,23 @@ encoded_string_t findMatch(int windowHead, int uncodedHead)
             j = 1;
 
             while (slidingWindow[(i + j) % WINDOW_SIZE] ==
-                uncodedLookahead[(uncodedHead + j) % MAX_CODED]) // look for more matches
+                uncodedLookahead[(uncodedHead + j) % MAX_CODED])
             {
-                if (j >= MAX_CODED) // if sliding window match is longer them max code len
+                if (j >= MAX_CODED)
                 {
                     break;
                 }
                 j++;
             };
 
-            if (j > matchData.length) // if we dound a longer match (better match) - KMP algorithem
+            if (j > matchData.length)
             {
                 matchData.length = j;
-                matchData.offset = i; // update matches and offset
+                matchData.offset = i;
             }
         }
 
-        if (j >= MAX_CODED) // if the the matches found is the max we can store
+        if (j >= MAX_CODED)
         {
             matchData.length = MAX_CODED;
             break;
@@ -80,6 +83,7 @@ encoded_string_t findMatch(int windowHead, int uncodedHead)
             break;
         }
     }
+
     return matchData;
 }
 
@@ -87,17 +91,6 @@ encoded_string_t findMatch(int windowHead, int uncodedHead)
 void EncodeLZSS(char* inFilePath, char* outFilePath)
 {
     //open files
-    FILE* inFile;
-    FILE* outFile;
-    errno_t error_codeA, error_codeB;
-    error_codeA = fopen_s(&inFile, inFilePath, "w+");
-
-    error_codeB = fopen_s(&outFile, outFilePath, "w+");
-    
-    if (error_codeA != 0 || error_codeB != 0)
-    {
-        return;
-    }
     unsigned char flags, flagPos, encodedData[16];
     int nextEncoded;                /* index into encodedData */
     encoded_string_t matchData;
@@ -111,17 +104,26 @@ void EncodeLZSS(char* inFilePath, char* outFilePath)
     windowHead = 0;
     uncodedHead = 0;
 
-    /*
-    * fill up the sliding window with known values
-    * if common values are used there is a better chance of matching in earlier strings
-    */
+
+    FILE* inFile;
+    FILE* outFile;
+                         /* next char in sliding window */
+
+    encoded_string_t code;
+    errno_t error_codeA, error_codeB;
+    error_codeA = fopen_s(&inFile, inFilePath, "rb");
+
+    error_codeB = fopen_s(&outFile, outFilePath, "wb");
+    
     for (i = 0; i < WINDOW_SIZE; i++)
     {
         slidingWindow[i] = ' ';
     }
-    /*
-    * load MAX_CODED bytes forom input to the lookahead buffer
-    */
+
+    /************************************************************************
+    * Copy MAX_CODED bytes from the input file into the uncoded lookahead
+    * buffer.
+    ************************************************************************/
     for (len = 0; len < MAX_CODED && (c = getc(inFile)) != EOF; len++)
     {
         uncodedLookahead[len] = c;
@@ -133,7 +135,7 @@ void EncodeLZSS(char* inFilePath, char* outFilePath)
     }
 
     /* Look for matching string in sliding window */
-    matchData = findMatch(windowHead, uncodedHead);
+    matchData = FindMatch(windowHead, uncodedHead);
 
     /* now encoded the rest of the file until an EOF is read */
     while (len > 0)
@@ -144,23 +146,23 @@ void EncodeLZSS(char* inFilePath, char* outFilePath)
             matchData.length = len;
         }
 
-        /* not long enough match.  write uncoded byte */
         if (matchData.length <= MAX_UNCODED)
         {
+            /* not long enough match.  write uncoded byte */
             matchData.length = 1;   /* set to 1 for 1 byte uncoded */
             flags |= flagPos;       /* mark with uncoded byte flag */
-            encodedData[nextEncoded++] = uncodedLookahead[uncodedHead]; // gg go next
+            encodedData[nextEncoded++] = uncodedLookahead[uncodedHead];
         }
         else
         {
             /* match length > MAX_UNCODED.  Encode as offset and length. */
             encodedData[nextEncoded++] =
-                (unsigned char)((matchData.offset & 0x0FFF) >> 4); // 0x0FFF = 11111111 12 bits
+                (unsigned char)((matchData.offset & 0x0FFF) >> 4);
+
             encodedData[nextEncoded++] =
-                (unsigned char)(((matchData.offset & 0x000F) << 4) | // 0x000F = 1111 4 bits
+                (unsigned char)(((matchData.offset & 0x000F) << 4) |
                     (matchData.length - (MAX_UNCODED + 1)));
-        }//binary AND & operator copies a bit to the result if it exists in both operands
-         //binaro OR | operator copies a bit if it exists in neither operand
+        }
 
         if (flagPos == 0x80)
         {
@@ -171,7 +173,6 @@ void EncodeLZSS(char* inFilePath, char* outFilePath)
             {
                 /* send at most 8 units of code together */
                 putc(encodedData[i], outFile);
-                putc('c', outFile);
             }
 
             /* reset encoded data buffer */
@@ -185,10 +186,10 @@ void EncodeLZSS(char* inFilePath, char* outFilePath)
             flagPos <<= 1;
         }
 
-        /*
+        /********************************************************************
         * Replace the matchData.length worth of bytes we've matched in the
         * sliding window with new bytes from the input file.
-        */
+        ********************************************************************/
         i = 0;
         while ((i < matchData.length) && ((c = getc(inFile)) != EOF))
         {
@@ -212,7 +213,7 @@ void EncodeLZSS(char* inFilePath, char* outFilePath)
         }
 
         /* find match for the remaining characters */
-        matchData = findMatch(windowHead, uncodedHead);
+        matchData = FindMatch(windowHead, uncodedHead);
     }
 
     /* write out any remaining encoded data */
@@ -237,14 +238,8 @@ void DecodeLZSS(char* inFilePath, char* outFilePath)
     //open files
     FILE* inFile;
     FILE* outFile;
-    errno_t error_codeA, error_codeB;
-    error_codeA = fopen_s(&inFile, inFilePath, "r");
 
-    error_codeB = fopen_s(&outFile, outFilePath, "w");
-    if (error_codeA != 0 || error_codeB != 0)
-    {
-        return;
-    }
+
 
     int  i, c;
     unsigned char flags, flagsUsed;     /* encoded/not encoded flag */
@@ -256,11 +251,13 @@ void DecodeLZSS(char* inFilePath, char* outFilePath)
     flagsUsed = 7;
     nextChar = 0;
 
-    /*
-    * Fill the sliding window buffer with some known vales.
-    * If common characters are used, there's an
-    * increased chance of matching to the earlier strings.
-    */
+
+
+    errno_t error_codeA, error_codeB;
+    error_codeA = fopen_s(&inFile, inFilePath, "rb");
+
+    error_codeB = fopen_s(&outFile, outFilePath, "wb");
+
     for (i = 0; i < WINDOW_SIZE; i++)
     {
         slidingWindow[i] = ' ';
@@ -268,22 +265,22 @@ void DecodeLZSS(char* inFilePath, char* outFilePath)
 
     while (TRUE)
     {
-        flags >>= 1; // right shift flags by 1
+        flags >>= 1;
         flagsUsed++;
 
         if (flagsUsed == 8)
         {
-            /* shift out all flag bits, read a new flag */
+            /* shifted out all the flag bits, read a new flag */
             if ((c = getc(inFile)) == EOF)
             {
                 break;
             }
 
-            flags = c & 0xFF; // get lowest 8 bits (get all flags)
+            flags = c & 0xFF;
             flagsUsed = 0;
         }
 
-        if (flags & 0x01) // if there isn't any encoded data
+        if (flags & 0x01)
         {
             /* uncoded character */
             if ((c = getc(inFile)) == EOF)
@@ -299,12 +296,12 @@ void DecodeLZSS(char* inFilePath, char* outFilePath)
         else
         {
             /* offset and length */
-            if ((code.offset = getc(inFile)) == EOF) // get the match offset
+            if ((code.offset = getc(inFile)) == EOF)
             {
                 break;
             }
 
-            if ((code.length = getc(inFile)) == EOF) // get the length
+            if ((code.length = getc(inFile)) == EOF)
             {
                 break;
             }
@@ -322,7 +319,7 @@ void DecodeLZSS(char* inFilePath, char* outFilePath)
             ****************************************************************/
             for (i = 0; i < code.length; i++)
             {
-                c = slidingWindow[(code.offset + i) % WINDOW_SIZE]; // get the string and 
+                c = slidingWindow[(code.offset + i) % WINDOW_SIZE];
                 putc(c, outFile);
                 uncodedLookahead[i] = c;
             }
@@ -338,4 +335,6 @@ void DecodeLZSS(char* inFilePath, char* outFilePath)
         }
     }
     printf("done!");
+    fclose(inFile);
+    fclose(outFile);
 }
