@@ -131,6 +131,10 @@ void EncodeLZSS(char* inFilePath, char* outFilePath)
 
     if (len == 0)
     {
+
+
+        fclose(inFile);
+        fclose(outFile);
         return;  /* inFile was empty */
     }
 
