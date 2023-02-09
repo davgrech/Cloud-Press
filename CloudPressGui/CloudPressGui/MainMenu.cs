@@ -20,7 +20,9 @@ namespace CloudPressGui
 
         const string STARTERPOSITION = @"C:\Users\user\";
         string SELECTED_PATH;
+
         string PATH_OF_ARCHIVE;
+
         bool IS_IN_ARCHIVE_MODE = false;
 
         public MainMenu(string PATH)
@@ -202,7 +204,7 @@ namespace CloudPressGui
 
         private void listView1_DoubleClick(object sender, EventArgs e)
         {
-            string fileSelectedName = "";
+            string fileSelectedName  = "";
             if (listView1.SelectedItems.Count > 0)
             {
                 ListViewItem selectedDoubleClick = listView1.SelectedItems[0];
