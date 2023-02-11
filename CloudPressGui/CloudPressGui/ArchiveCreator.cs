@@ -48,7 +48,8 @@ namespace CloudPressGui
             }
             //after finish the temp folder
             //
-            pathOfArchive = Path.Combine(pathOfArchive, Path.GetFileNameWithoutExtension(pathOfArchive)) + ".7z";
+            
+           
 
 
      
@@ -64,6 +65,22 @@ namespace CloudPressGui
 
 
         }
+        public static void extractArchive(string pathOfArchive, string destination)
+        {
+            ExtractFile(pathOfArchive, destination);
+
+        }
+
+        private static void ExtractFile(string archivePath, string destinationPath)
+        {
+            SevenZipExtractor extractor = new SevenZipExtractor(archivePath);
+           
+            extractor.ExtractArchive(destinationPath);
+
+            
+
+        }
+
         /*
          this function exists to decompress a specific file so the person can view it whether he clicked an archive 
         */
@@ -108,9 +125,12 @@ namespace CloudPressGui
         }
         static void Process_Exited(object sender, EventArgs e)
         {
-            deleteDirectory(VIEW_FOLDER_OF_PROJECT);
-           
-           
+            if(Directory.Exists(VIEW_FOLDER_OF_PROJECT)) 
+                deleteDirectory(VIEW_FOLDER_OF_PROJECT);
+
+
+
+
         }
 
         private static void deleteDirectory(string folderPath)

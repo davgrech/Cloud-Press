@@ -21,29 +21,43 @@ namespace CloudPressGui
 
     public partial class addGui : Form
     {
-        string[] PATHS_TO_COMPRESS = { @"C:\Users\user\Desktop\abc.txt", @"C:\Users\user\Desktop\lmao.txt" };
+
+
+        List<string> PATHS_TO_COMPRESS = new List<string>();
+
         //TODO: NEED TO IMPORT THE FUNCTION WITHOUT ERRORS
-        [DllImport(@"C:\\Users\\user\\Desktop\\Dolev\\magshimimProjects\\Projects_2022\\ashkelon-1206-compressor\\dll_compression_decompression\\x64\\Debug\\dll_compression_decompression.dll", CallingConvention =  CallingConvention.Cdecl)]
+        [DllImport(@"dll_compression_decompression.dll", CallingConvention =  CallingConvention.Cdecl)]
         static extern void EncodeLZSS(string inFilePath, string outFilePath);
 
-     
+        static string ARCHIVE_PATH;  
      
 
-        public addGui(String[] paths)
+        public addGui(List<string> paths, string archive)
         {
             InitializeComponent();
             //all the passes the user selected to add
-           if(paths.Length ==0)
+           
+
+           //init global variables
+            PATHS_TO_COMPRESS = paths;
+            ARCHIVE_PATH = archive;
+            if (paths == null) Application.Exit();
+            if (PATHS_TO_COMPRESS.Count > 0)
             {
-                txtArchiveName.Text = "hagagagaga";
+                if (PATHS_TO_COMPRESS.Count == 1)
+                    txtArchiveName.Text = Path.Combine(ARCHIVE_PATH, Path.GetFileNameWithoutExtension(PATHS_TO_COMPRESS[0])) + ".7z";
+                else
+                    txtArchiveName.Text = Path.Combine(ARCHIVE_PATH, Path.GetFileNameWithoutExtension(ARCHIVE_PATH)) + ".7z";
+
+               
             }
             else
             {
-                txtArchiveName.Text = paths[0];
+                return;
             }
            
-            
            
+
             //PATHS_TO_COMPRESS = paths;
         }
 
@@ -56,13 +70,7 @@ namespace CloudPressGui
             }
         }
 
-        private void folderBtn_Click(object sender, EventArgs e)
-        {
-            FolderBrowserDialog fdb = new FolderBrowserDialog();
-            fdb.Description = "Select your path.";
-            if (fdb.ShowDialog() == DialogResult.OK)
-                txtFolder.Text = fdb.SelectedPath;
-        }
+       
 
 
 
@@ -71,23 +79,29 @@ namespace CloudPressGui
          
 
             //check fields
-            if (txtArchiveName.Text == "" || txtFolder.Text == "")
-            {
-                return;
-            }
+            //if (txtArchiveName.Text == "" || txtFolder.Text == "")
+            //{
+            //    return;
+            //}
 
             //get name  of future rar archive
-            String nameOfArchive = Path.GetFileNameWithoutExtension(txtArchiveName.Text) + ".7z";
+            String nameOfArchive;
+            
+            
+           
 
 
-            if (!Directory.Exists(txtFolder.Text))
-            {
-                return;
-            }
+            //if (!Directory.Exists(txtFolder.Text))
+            //{
+            //    return;
+            //}
 
             //destination path for our future archive
-            string archivePath = Path.Combine(txtFolder.Text, nameOfArchive);
+            //string archivePath = Path.Combine(txtFolder.Text, nameOfArchive);
+            ArchiveCreator.createArchive(txtArchiveName.Text, PATHS_TO_COMPRESS);
 
+
+            this.Close();
 
 
 
@@ -105,19 +119,18 @@ namespace CloudPressGui
 
                 
 
-      
-            ZipFiles(PATHS_TO_COMPRESS, archivePath);
+            
 
 
 
 
         }
-        public void ZipFiles(string[] filePaths, string outputFilePath, string password = null)
+        public void ZipFiles(List<string> filePaths, string outputFilePath, string password = null)
         {
             var tmp = new SevenZipCompressor();
             tmp.CompressionLevel = CompressionLevel.None;
             tmp.ScanOnlyWritable = true;
-            tmp.CompressFilesEncrypted(outputFilePath, password, filePaths);
+            tmp.CompressFilesEncrypted(outputFilePath, password, filePaths.ToArray());
         }
         private void addGui_Load(object sender, EventArgs e)
         {

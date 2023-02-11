@@ -17,6 +17,8 @@ namespace CloudPressGui
 {
     public partial class MainMenu : Form
     {
+        static string TEMP_FOLDER_OF_PROJECT = Path.Combine(Environment.CurrentDirectory, "temp");
+        static string VIEW_FOLDER_OF_PROJECT = Path.Combine(Environment.CurrentDirectory, "view");
 
         const string STARTERPOSITION = @"C:\Users\user\";
         string SELECTED_PATH;
@@ -31,8 +33,12 @@ namespace CloudPressGui
             SELECTED_PATH = PATH;
             PopulateTreeView();
             this.treeView1.NodeMouseClick += new TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseClick);
-        }
 
+
+
+            
+        }
+        
         private void browserBtn_Click(object sender, EventArgs e)
         {
 
@@ -43,7 +49,7 @@ namespace CloudPressGui
 
         }
 
-
+        
 
 
 
@@ -168,27 +174,54 @@ namespace CloudPressGui
 
         private void ad_Click(object sender, EventArgs e)
         {
+
+
+            //archive
+            PATH_OF_ARCHIVE = STARTERPOSITION + treeView1.SelectedNode.FullPath;
+
             List<string> listOfPaths = getPathsToArchiveFromGui();
 
+            
             //create + compress the files 
             if (PATH_OF_ARCHIVE == "") return;
 
-            ArchiveCreator.createArchive(PATH_OF_ARCHIVE, listOfPaths);
+            addGui addWindows = new addGui(listOfPaths, PATH_OF_ARCHIVE);
+            addWindows.FormClosed += AddWindows_FormClosed;
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.ControlBox = false;
+
+
+            addWindows.Show();
+            
 
         }
+
+        private void AddWindows_FormClosed(object sender, FormClosedEventArgs e)
+        {
+           this.FormBorderStyle= FormBorderStyle.Sizable;
+            this.ControlBox = true;
+        }
+
         private List<string> getPathsToArchiveFromGui()
         {
             List<string> paths = new List<string>();
 
             //"C:\Users\user\Desktop\CodeBlocks.rar"
-            PATH_OF_ARCHIVE = STARTERPOSITION + treeView1.SelectedNode.FullPath;
-
-            if (PATH_OF_ARCHIVE == null)
-            {
-                return new List<string>();
-            }
+           
+            
 
             var selectedItemsOfListView = listView1.SelectedItems;
+            if(selectedItemsOfListView.Count > 0)
+            {
+               
+               
+
+                if (PATH_OF_ARCHIVE == null)
+                    return new List<string>();
+                
+            }
+            
+
             for (int i = 0; i < selectedItemsOfListView.Count; i++) // for every selected item get his path 
             {
                 string tempPath = selectedItemsOfListView[i].SubItems[0].Text;//loop through each item
@@ -315,6 +348,54 @@ namespace CloudPressGui
 
             return value >= minValue && value <= maxValue;
         }
+
+
+
+        //deconstructor
+        private void MainMenu_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if(Directory.Exists(TEMP_FOLDER_OF_PROJECT))
+                Directory.Delete(TEMP_FOLDER_OF_PROJECT);
+            if (Directory.Exists(VIEW_FOLDER_OF_PROJECT))
+                Directory.Delete(VIEW_FOLDER_OF_PROJECT);
+
+        }
+
+        private void extractButton_Click(object sender, EventArgs e)
+        {
+            //archive after selected
+            //PATH_OF_ARCHIVE = STARTERPOSITION + treeView1.SelectedNode.FullPath + listView1.Sel.SubItems[0].Text;
+            List<string> paths_to_extract = new List<string>();
+            if(IS_IN_ARCHIVE_MODE)
+            {
+                MessageBox.Show(PATH_OF_ARCHIVE, "lol", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                if(listView1.SelectedItems.Count > 0)
+                {
+                    for (int i = 0; i < listView1.SelectedItems.Count; i++)
+                    {
+                        if (Path.GetExtension(listView1.SelectedItems[i].Text) == ".7z")
+                        {
+                            PATH_OF_ARCHIVE = Path.Combine(STARTERPOSITION, treeView1.SelectedNode.FullPath, listView1.SelectedItems[0].SubItems[0].Text);
+                            paths_to_extract.Add(PATH_OF_ARCHIVE);
+                        }
+                    }
+
+                    string dest_folder = Path.Combine(STARTERPOSITION, treeView1.SelectedNode.FullPath);
+                    extractGui extractWindows = new extractGui(paths_to_extract, dest_folder);
+
+                    extractWindows.Show();
+
+                }
+
+
+
+
+            }
+        }
+
     }
     
         
