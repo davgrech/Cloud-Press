@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Threading;
 using SevenZip;
 using System.Diagnostics;
+using System.Windows.Forms;
 
 namespace CloudPressGui
 {
@@ -73,13 +74,54 @@ namespace CloudPressGui
 
         private static void ExtractFile(string archivePath, string destinationPath)
         {
-            SevenZipExtractor extractor = new SevenZipExtractor(archivePath);
+            createDirectory(TEMP_FOLDER_OF_PROJECT);
+
+            //dolev/dolev
            
+            SevenZipExtractor extractor = new SevenZipExtractor(archivePath);
+
             extractor.ExtractArchive(destinationPath);
 
-            
+            foreach(var file in extractor.ArchiveFileData)
+            {
+                string fullpath = Path.Combine(destinationPath, file.FileName);
+                //if (File.Exists(fullpath))
+                //{
+                //    MessageBox.Show("Are you sure?", "dummy", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //}
+                
+                
+
+
+
+                
+             
+
+
+
+                //decoded file here
+                string tempPath = Path.Combine(Path.GetTempPath(),Path.GetTempFileName());
+
+                //original content in fullpath
+                DecodeLZSS(fullpath, tempPath);
+
+                CopyFile(tempPath, fullpath);
+
+
+
+            }
+
+
+            deleteDirectory(TEMP_FOLDER_OF_PROJECT);
 
         }
+        private static void CopyFile(string sourceFile, string destinationFile)
+        {
+            byte[] fileBytes = File.ReadAllBytes(sourceFile);
+            File.WriteAllBytes(destinationFile, fileBytes);
+        }
+       
+
 
         /*
          this function exists to decompress a specific file so the person can view it whether he clicked an archive 
@@ -94,6 +136,7 @@ namespace CloudPressGui
             createDirectory(TEMP_FOLDER_OF_PROJECT);
 
             
+            //putting encoded file in temp foldeer
             string tempOutputPath = Path.Combine(TEMP_FOLDER_OF_PROJECT, Path.GetFileName(pathExract));
             using (SevenZipExtractor extractor = new SevenZipExtractor(pathToArchive))
             {
@@ -109,7 +152,7 @@ namespace CloudPressGui
             
             string viewFile = Path.Combine(VIEW_FOLDER_OF_PROJECT, Path.GetFileName(pathExract));
 
-            //putting the decoded file in view
+            //putting the decoded file in view so ppl can process it
             DecodeLZSS(tempOutputPath, viewFile);
 
             Process process = new Process();
@@ -120,6 +163,7 @@ namespace CloudPressGui
             
 
             deleteDirectory(TEMP_FOLDER_OF_PROJECT);
+        
            
 
         }

@@ -86,6 +86,7 @@ namespace CloudPressGui
                 nodeToAddTo.Nodes.Add(aNode);
             }
         }
+        
 
 
         void treeView1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
@@ -378,13 +379,14 @@ namespace CloudPressGui
                     {
                         if (Path.GetExtension(listView1.SelectedItems[i].Text) == ".7z")
                         {
-                            PATH_OF_ARCHIVE = Path.Combine(STARTERPOSITION, treeView1.SelectedNode.FullPath, listView1.SelectedItems[0].SubItems[0].Text);
+                            PATH_OF_ARCHIVE = Path.Combine(STARTERPOSITION, treeView1.SelectedNode.FullPath, listView1.SelectedItems[i].SubItems[0].Text);
                             paths_to_extract.Add(PATH_OF_ARCHIVE);
                         }
                     }
 
-                    string dest_folder = Path.Combine(STARTERPOSITION, treeView1.SelectedNode.FullPath);
-                    extractGui extractWindows = new extractGui(paths_to_extract, dest_folder);
+                    string folder_name = treeView1.SelectedNode.FullPath;
+                    string dest_folder = Path.Combine(STARTERPOSITION, folder_name);
+                    extractGui extractWindows = new extractGui(paths_to_extract, Path.Combine(dest_folder, Path.GetFileNameWithoutExtension(dest_folder)));
 
                     extractWindows.Show();
 
