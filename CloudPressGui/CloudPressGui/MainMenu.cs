@@ -20,7 +20,9 @@ namespace CloudPressGui
         static string TEMP_FOLDER_OF_PROJECT = Path.Combine(Environment.CurrentDirectory, "temp");
         static string VIEW_FOLDER_OF_PROJECT = Path.Combine(Environment.CurrentDirectory, "view");
 
+        //globals to navigate
         const string STARTERPOSITION = @"C:\Users\user\";
+        string CURRENT_PATH = STARTERPOSITION + @"Desktop";
         string SELECTED_PATH;
 
         string PATH_OF_ARCHIVE;
@@ -58,7 +60,7 @@ namespace CloudPressGui
             TreeNode rootNode;
 
             //DirectoryInfo info = new DirectoryInfo(SELECTED_PATH);
-            DirectoryInfo info = new DirectoryInfo(STARTERPOSITION + @"Desktop");
+            DirectoryInfo info = new DirectoryInfo(CURRENT_PATH);
             if (info.Exists)
             {
                 rootNode = new TreeNode(info.Name);
@@ -97,7 +99,7 @@ namespace CloudPressGui
             ListViewItem.ListViewSubItem[] subItems;
             ListViewItem item = null;
 
-
+            CURRENT_PATH = STARTERPOSITION + @"Desktop";
 
             IS_IN_ARCHIVE_MODE = false;
 
@@ -178,7 +180,7 @@ namespace CloudPressGui
 
 
             //archive
-            PATH_OF_ARCHIVE = STARTERPOSITION + treeView1.SelectedNode.FullPath;
+            PATH_OF_ARCHIVE = CURRENT_PATH;
 
             List<string> listOfPaths = getPathsToArchiveFromGui();
 
@@ -246,7 +248,7 @@ namespace CloudPressGui
             }
 
             //global variable to store the path of slected archive
-            string pathOfSelectedWithoutName = STARTERPOSITION + treeView1.SelectedNode.FullPath;
+            string pathOfSelectedWithoutName = CURRENT_PATH;
 
             //selected path
             string pathOfSelected = Path.Combine(pathOfSelectedWithoutName, fileSelectedName);
@@ -275,16 +277,37 @@ namespace CloudPressGui
                 }
                 else
                 {
-                    Process process = new Process();
-                    process.StartInfo.FileName = pathOfSelected;
-                    try
+                    if (Directory.Exists(pathOfSelected))
                     {
-                        process.Start();
+                        CURRENT_PATH = pathOfSelected;
+                        listView1.Items.Clear();
+                        DirectoryInfo directory = new DirectoryInfo(pathOfSelected);
+                        FileSystemInfo[] fileSystemInfos = directory.GetFileSystemInfos();
+                        foreach(FileSystemInfo fileSystemInfo in fileSystemInfos)
+                        {
+                            if (Path.GetExtension(fileSystemInfo.Name) == ".7z")
+                                editItemsListView(fileSystemInfo.Name, fileSystemInfo.LastAccessTime.ToString(), (int)fileTypeMap.TypeMap.Zip);
+                            else if (Directory.Exists(fileSystemInfo.FullName))
+                                editItemsListView(fileSystemInfo.Name, fileSystemInfo.LastAccessTime.ToString(), (int)fileTypeMap.TypeMap.Folder);
+                            else
+                                editItemsListView(fileSystemInfo.Name, fileSystemInfo.LastAccessTime.ToString(), (int)fileTypeMap.TypeMap.File);
+                            
+                        }
                     }
-                    catch (Exception ex)
+                    else
                     {
-                        //Error
+                        Process process = new Process();
+                        process.StartInfo.FileName = pathOfSelected;
+                        try
+                        {
+                            process.Start();
+                        }
+                        catch (Exception ex)
+                        {
+                            //Error
+                        }
                     }
+                   
                     
                 }
                 //runs the selected process
@@ -379,14 +402,13 @@ namespace CloudPressGui
                     {
                         if (Path.GetExtension(listView1.SelectedItems[i].Text) == ".7z")
                         {
-                            PATH_OF_ARCHIVE = Path.Combine(STARTERPOSITION, treeView1.SelectedNode.FullPath, listView1.SelectedItems[i].SubItems[0].Text);
+                            PATH_OF_ARCHIVE = Path.Combine(CURRENT_PATH, listView1.SelectedItems[i].SubItems[0].Text);
                             paths_to_extract.Add(PATH_OF_ARCHIVE);
                         }
                     }
 
-                    string folder_name = treeView1.SelectedNode.FullPath;
-                    string dest_folder = Path.Combine(STARTERPOSITION, folder_name);
-                    extractGui extractWindows = new extractGui(paths_to_extract, Path.Combine(dest_folder, Path.GetFileNameWithoutExtension(dest_folder)));
+                   
+                    extractGui extractWindows = new extractGui(paths_to_extract, Path.Combine(CURRENT_PATH, Path.GetFileNameWithoutExtension(CURRENT_PATH)));
 
                     extractWindows.Show();
 
