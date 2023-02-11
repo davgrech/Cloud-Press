@@ -33,11 +33,12 @@ namespace CloudPressGui
         {
             InitializeComponent();
             SELECTED_PATH = PATH;
-            PopulateTreeView();
+           
             this.treeView1.NodeMouseClick += new TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseClick);
 
+            txtCurrentPath.Text = CURRENT_PATH;
 
-
+            refreshListView(CURRENT_PATH);
             
         }
         
@@ -100,7 +101,7 @@ namespace CloudPressGui
             ListViewItem item = null;
 
             CURRENT_PATH = STARTERPOSITION + @"Desktop";
-
+           
             IS_IN_ARCHIVE_MODE = false;
 
             foreach (DirectoryInfo dir in nodeDirInfo.GetDirectories())
@@ -125,7 +126,7 @@ namespace CloudPressGui
 
             }
 
-            listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+            
         }
 
 
@@ -279,20 +280,11 @@ namespace CloudPressGui
                 {
                     if (Directory.Exists(pathOfSelected))
                     {
+
                         CURRENT_PATH = pathOfSelected;
-                        listView1.Items.Clear();
-                        DirectoryInfo directory = new DirectoryInfo(pathOfSelected);
-                        FileSystemInfo[] fileSystemInfos = directory.GetFileSystemInfos();
-                        foreach(FileSystemInfo fileSystemInfo in fileSystemInfos)
-                        {
-                            if (Path.GetExtension(fileSystemInfo.Name) == ".7z")
-                                editItemsListView(fileSystemInfo.Name, fileSystemInfo.LastAccessTime.ToString(), (int)fileTypeMap.TypeMap.Zip);
-                            else if (Directory.Exists(fileSystemInfo.FullName))
-                                editItemsListView(fileSystemInfo.Name, fileSystemInfo.LastAccessTime.ToString(), (int)fileTypeMap.TypeMap.Folder);
-                            else
-                                editItemsListView(fileSystemInfo.Name, fileSystemInfo.LastAccessTime.ToString(), (int)fileTypeMap.TypeMap.File);
-                            
-                        }
+                        txtCurrentPath.Text = CURRENT_PATH;
+                        refreshListView(CURRENT_PATH);
+
                     }
                     else
                     {
@@ -315,6 +307,7 @@ namespace CloudPressGui
             }
 
         }
+       
         private void putArchiveFilesToListView(SevenZipExtractor extractor)
         {
             listView1.Items.Clear(); //delete all the items from listview
@@ -392,7 +385,10 @@ namespace CloudPressGui
             List<string> paths_to_extract = new List<string>();
             if(IS_IN_ARCHIVE_MODE)
             {
-                MessageBox.Show(PATH_OF_ARCHIVE, "lol", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                paths_to_extract.Add(PATH_OF_ARCHIVE);
+                extractGui extractWindows = new extractGui(paths_to_extract, Path.Combine(CURRENT_PATH, Path.GetFileNameWithoutExtension(CURRENT_PATH)));
+
+                extractWindows.Show();
             }
             else
             {
@@ -420,6 +416,50 @@ namespace CloudPressGui
             }
         }
 
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            if(IS_IN_ARCHIVE_MODE)
+            {
+                IS_IN_ARCHIVE_MODE = false;
+                refreshListView(CURRENT_PATH);
+                return;
+            }
+               
+            
+
+            DirectoryInfo parentDirectory = Directory.GetParent(CURRENT_PATH);
+            if(!parentDirectory.FullName.Equals(STARTERPOSITION.Substring(0, STARTERPOSITION.Length-1)))
+            {
+                CURRENT_PATH = parentDirectory.FullName;
+                txtCurrentPath.Text = CURRENT_PATH;
+                refreshListView(CURRENT_PATH);
+            }
+               
+            
+        }
+
+        private void refreshListView(string path)
+        {
+            listView1.Items.Clear();
+            DirectoryInfo directory = new DirectoryInfo(path);
+            FileSystemInfo[] fileSystemInfos = directory.GetFileSystemInfos();
+            foreach (FileSystemInfo fileSystemInfo in fileSystemInfos)
+            {
+                if (Path.GetExtension(fileSystemInfo.Name) == ".7z")
+                    editItemsListView(fileSystemInfo.Name, fileSystemInfo.LastAccessTime.ToString(), (int)fileTypeMap.TypeMap.Zip);
+                else if (Directory.Exists(fileSystemInfo.FullName))
+                    editItemsListView(fileSystemInfo.Name, fileSystemInfo.LastAccessTime.ToString(), (int)fileTypeMap.TypeMap.Folder);
+                else
+                    editItemsListView(fileSystemInfo.Name, fileSystemInfo.LastAccessTime.ToString(), (int)fileTypeMap.TypeMap.File);
+
+            }
+            listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+        }
+
+        private void btnBrowse_Click(object sender, EventArgs e)
+        {
+            refreshListView(CURRENT_PATH);
+        }
     }
     
         

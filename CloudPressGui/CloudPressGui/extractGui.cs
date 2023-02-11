@@ -50,6 +50,9 @@ namespace CloudPressGui
                 ArchiveCreator.extractArchive(PATH_OF_ARCHIVE[i], txtPath.Text);
 
             }
+            this.Close();
         }
+
+        
     }
 }

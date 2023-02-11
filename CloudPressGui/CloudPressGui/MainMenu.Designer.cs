@@ -62,6 +62,9 @@
             this.File = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Type = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.LastModified = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.txtCurrentPath = new System.Windows.Forms.TextBox();
+            this.btnBrowse = new System.Windows.Forms.Button();
+            this.btnBack = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -266,7 +269,7 @@
             // 
             // splitContainer1
             // 
-            this.splitContainer1.Location = new System.Drawing.Point(0, 98);
+            this.splitContainer1.Location = new System.Drawing.Point(0, 145);
             this.splitContainer1.Margin = new System.Windows.Forms.Padding(2);
             this.splitContainer1.Name = "splitContainer1";
             // 
@@ -277,8 +280,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.listView1);
-            this.splitContainer1.Size = new System.Drawing.Size(800, 384);
-            this.splitContainer1.SplitterDistance = 266;
+            this.splitContainer1.Size = new System.Drawing.Size(809, 337);
+            this.splitContainer1.SplitterDistance = 270;
             this.splitContainer1.SplitterWidth = 3;
             this.splitContainer1.TabIndex = 10;
             // 
@@ -291,7 +294,7 @@
             this.treeView1.Margin = new System.Windows.Forms.Padding(2);
             this.treeView1.Name = "treeView1";
             this.treeView1.SelectedImageIndex = 0;
-            this.treeView1.Size = new System.Drawing.Size(266, 384);
+            this.treeView1.Size = new System.Drawing.Size(270, 337);
             this.treeView1.TabIndex = 0;
             // 
             // imageList1
@@ -313,7 +316,7 @@
             this.listView1.Location = new System.Drawing.Point(0, 0);
             this.listView1.Margin = new System.Windows.Forms.Padding(2);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(531, 384);
+            this.listView1.Size = new System.Drawing.Size(536, 337);
             this.listView1.SmallImageList = this.imageList1;
             this.listView1.TabIndex = 11;
             this.listView1.UseCompatibleStateImageBehavior = false;
@@ -321,11 +324,41 @@
             this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
             this.listView1.DoubleClick += new System.EventHandler(this.listView1_DoubleClick);
             // 
+            // txtCurrentPath
+            // 
+            this.txtCurrentPath.Location = new System.Drawing.Point(66, 120);
+            this.txtCurrentPath.Name = "txtCurrentPath";
+            this.txtCurrentPath.Size = new System.Drawing.Size(660, 20);
+            this.txtCurrentPath.TabIndex = 11;
+            // 
+            // btnBrowse
+            // 
+            this.btnBrowse.Location = new System.Drawing.Point(733, 118);
+            this.btnBrowse.Name = "btnBrowse";
+            this.btnBrowse.Size = new System.Drawing.Size(64, 23);
+            this.btnBrowse.TabIndex = 12;
+            this.btnBrowse.Text = "refresh";
+            this.btnBrowse.UseVisualStyleBackColor = true;
+            this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
+            // 
+            // btnBack
+            // 
+            this.btnBack.Location = new System.Drawing.Point(0, 120);
+            this.btnBack.Name = "btnBack";
+            this.btnBack.Size = new System.Drawing.Size(60, 23);
+            this.btnBack.TabIndex = 12;
+            this.btnBack.Text = "back";
+            this.btnBack.UseVisualStyleBackColor = true;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
+            // 
             // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(809, 516);
+            this.Controls.Add(this.btnBack);
+            this.Controls.Add(this.btnBrowse);
+            this.Controls.Add(this.txtCurrentPath);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.button5);
@@ -384,5 +417,8 @@
         private System.Windows.Forms.ColumnHeader Type;
         private System.Windows.Forms.ColumnHeader LastModified;
         private System.Windows.Forms.ImageList imageList1;
+        private System.Windows.Forms.TextBox txtCurrentPath;
+        private System.Windows.Forms.Button btnBrowse;
+        private System.Windows.Forms.Button btnBack;
     }
 }

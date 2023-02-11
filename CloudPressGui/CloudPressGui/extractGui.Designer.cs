@@ -203,6 +203,7 @@
             this.Controls.Add(this.txtPath);
             this.Name = "extractGui";
             this.Text = "extractGui";
+            
             this.Load += new System.EventHandler(this.extractGui_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
