@@ -243,7 +243,15 @@ namespace CloudPressGui
                 {
                     Process process = new Process();
                     process.StartInfo.FileName = pathOfSelected;
-                    process.Start();
+                    try
+                    {
+                        process.Start();
+                    }
+                    catch (Exception ex)
+                    {
+                        //Error
+                    }
+                    
                 }
                 //runs the selected process
                

@@ -16,7 +16,7 @@ namespace CloudPressGui
 
        
         static string TEMP_FOLDER_OF_PROJECT = Path.Combine(Environment.CurrentDirectory, "temp");
-        static string VIEW_FOLDER_OF_PROJECT = Path.Combine(TEMP_FOLDER_OF_PROJECT, "temp");
+        static string VIEW_FOLDER_OF_PROJECT = Path.Combine(Environment.CurrentDirectory, "view");
         [DllImport(@"dll_compression_decompression.dll", CallingConvention = CallingConvention.Cdecl)]
         static extern void EncodeLZSS(string inFilePath, string outFilePath);
 
@@ -71,10 +71,10 @@ namespace CloudPressGui
         {
 
             //create our temp directory 
-            createDirectory(TEMP_FOLDER_OF_PROJECT);
+            
 
             createDirectory(VIEW_FOLDER_OF_PROJECT);
-
+            createDirectory(TEMP_FOLDER_OF_PROJECT);
 
             
             string tempOutputPath = Path.Combine(TEMP_FOLDER_OF_PROJECT, Path.GetFileName(pathExract));
@@ -82,15 +82,17 @@ namespace CloudPressGui
             {
                 using (Stream stream = new FileStream(tempOutputPath, FileMode.Create))
                 {
+
+                    //putting the encoded file in temp
                     extractor.ExtractFile(Path.GetFileName(pathExract), stream);
                 }
                 
             }
 
-
+            
             string viewFile = Path.Combine(VIEW_FOLDER_OF_PROJECT, Path.GetFileName(pathExract));
 
-
+            //putting the decoded file in view
             DecodeLZSS(tempOutputPath, viewFile);
 
             Process process = new Process();
@@ -100,14 +102,14 @@ namespace CloudPressGui
             process.Start();
             
 
-        
+            deleteDirectory(TEMP_FOLDER_OF_PROJECT);
            
 
         }
         static void Process_Exited(object sender, EventArgs e)
         {
             deleteDirectory(VIEW_FOLDER_OF_PROJECT);
-            deleteDirectory(TEMP_FOLDER_OF_PROJECT);
+           
            
         }
 
