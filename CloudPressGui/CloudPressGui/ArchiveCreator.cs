@@ -154,12 +154,18 @@ namespace CloudPressGui
 
             //putting the decoded file in view so ppl can process it
             DecodeLZSS(tempOutputPath, viewFile);
+            try
+            {
+                Process process = new Process();
+                process.StartInfo.FileName = viewFile;
+                process.EnableRaisingEvents = true;
+                process.Exited += Process_Exited;
+                process.Start();
+            }catch (Exception ex)
+            {
+                
+            }
 
-            Process process = new Process();
-            process.StartInfo.FileName = viewFile;
-            process.EnableRaisingEvents = true;
-            process.Exited += Process_Exited;
-            process.Start();
             
 
             deleteDirectory(TEMP_FOLDER_OF_PROJECT);

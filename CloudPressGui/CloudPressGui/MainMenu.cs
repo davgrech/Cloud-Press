@@ -130,7 +130,9 @@ namespace CloudPressGui
         }
 
 
-
+        /*
+         * multy select function.
+         */
         private void listView1_MouseDown(object sender, MouseEventArgs e)
         {
             //if to handle multy select in a list view
@@ -440,6 +442,7 @@ namespace CloudPressGui
 
         private void refreshListView(string path)
         {
+            CURRENT_PATH = txtCurrentPath.Text;
             listView1.Items.Clear();
             DirectoryInfo directory = new DirectoryInfo(path);
             FileSystemInfo[] fileSystemInfos = directory.GetFileSystemInfos();
