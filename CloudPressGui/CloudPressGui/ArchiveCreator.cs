@@ -152,8 +152,22 @@ namespace CloudPressGui
                 //{
                 //    MessageBox.Show("Are you sure?", "dummy", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 //}
-                
-                
+
+                if (!Directory.Exists(fullpath))
+                {
+                    
+                    //decoded file here
+                    string tempPath = Path.Combine(Path.GetTempPath(), Path.GetTempFileName());
+
+                    //original content in fullpath
+                    DecodeLZSS(fullpath, tempPath);
+
+                    //create the extracted directory
+                    createDirectory(Path.GetDirectoryName(fullpath));
+
+                    CopyFile(tempPath, fullpath);
+
+                }
 
 
 
@@ -162,13 +176,7 @@ namespace CloudPressGui
 
                  
 
-                //decoded file here
-                string tempPath = Path.Combine(Path.GetTempPath(),Path.GetTempFileName());
-
-                //original content in fullpath
-                DecodeLZSS(fullpath, tempPath);
-
-                CopyFile(tempPath, fullpath);
+               
 
 
 
