@@ -30,6 +30,15 @@ namespace CloudPressGui
             tmp.CompressionLevel = CompressionLevel.None;
             tmp.ScanOnlyWritable = true;
             tmp.CompressFilesEncrypted(outputFilePath, password, filePaths);
+            
+            
+        }
+        public static void ZipDirectory(string DirectroryPath, string outputFilePath)
+        {
+            var tmp = new SevenZipCompressor();
+            tmp.CompressionLevel = CompressionLevel.None;
+            tmp.ScanOnlyWritable = true;
+            tmp.CompressDirectory(DirectroryPath, outputFilePath);
         }
 
         public static void createArchive(string pathOfArchive, List<string> pathsToEncode)
@@ -38,15 +47,43 @@ namespace CloudPressGui
             //create temp folder
             createDirectory(TEMP_FOLDER_OF_PROJECT);
 
-            foreach (string filePath in pathsToEncode)
+
+            string tempOutputPath = "";
+
+            foreach (string path in pathsToEncode)
             {
-                string tempOutputPath = Path.Combine(TEMP_FOLDER_OF_PROJECT, Path.GetFileName(filePath));
+                
+                //if directory
+                if (Directory.Exists(path))
+                {
+
+                    //get all the files and childdirectories files
+                    string[] fileEntries = Directory.GetFiles(path, "*", SearchOption.AllDirectories); //search in all directories
+                    foreach (string fileEntry in fileEntries)
+                    {
+                        string relativePath = GetRelativePath(Path.GetDirectoryName(path), fileEntry);
+                        string parentDirectory = Path.GetDirectoryName(relativePath);  // relative directory 
+                        tempOutputPath = Path.Combine(TEMP_FOLDER_OF_PROJECT, parentDirectory, Path.GetFileName(fileEntry)); // to compress directories
+                        createDirectory(Path.Combine(TEMP_FOLDER_OF_PROJECT, parentDirectory));
+                        EncodeLZSS(fileEntry, tempOutputPath);
+
+                        ZipDirectory(TEMP_FOLDER_OF_PROJECT, pathOfArchive);
+                    }
+
+                }
+                else
+                {
+                    tempOutputPath = Path.Combine(TEMP_FOLDER_OF_PROJECT, Path.GetFileName(path));
+                    EncodeLZSS(path, tempOutputPath);
+                    ZipFiles(Directory.GetFiles(TEMP_FOLDER_OF_PROJECT), pathOfArchive); // get the files from temp folder and add it to archive 
+                }
+                
             
 
-                EncodeLZSS(filePath, tempOutputPath);
+               
               
-
             }
+
             //after finish the temp folder
             //
             
@@ -55,7 +92,7 @@ namespace CloudPressGui
 
      
       
-            ZipFiles(Directory.GetFiles(TEMP_FOLDER_OF_PROJECT), pathOfArchive); // get the files from temp folder and add it to archive 
+           
 
 
 
@@ -65,6 +102,32 @@ namespace CloudPressGui
 
 
 
+        }
+        //this is getting the unique parent directoreis from pathA to pathB
+        public static string GetRelativePath(string fromPath, string toPath)
+        {
+            var fromUri = new Uri(fromPath);
+            var toUri = new Uri(toPath);
+
+            if (fromUri.Scheme != toUri.Scheme)
+            {
+                return toPath;
+            }
+
+            var relativeUri = fromUri.MakeRelativeUri(toUri);
+            var relativePath = Uri.UnescapeDataString(relativeUri.ToString());
+
+            if (string.IsNullOrEmpty(relativePath))
+            {
+                return ".";
+            }
+
+            if (relativePath.IndexOf('/') >= 0)
+            {
+                relativePath = relativePath.Substring(relativePath.IndexOf('/') + 1);
+            }
+
+            return relativePath.Replace('/', Path.DirectorySeparatorChar);
         }
         public static void extractArchive(string pathOfArchive, string destination)
         {
@@ -97,7 +160,7 @@ namespace CloudPressGui
                 
              
 
-
+                 
 
                 //decoded file here
                 string tempPath = Path.Combine(Path.GetTempPath(),Path.GetTempFileName());
@@ -144,7 +207,8 @@ namespace CloudPressGui
                 {
 
                     //putting the encoded file in temp
-                    extractor.ExtractFile(Path.GetFileName(pathExract), stream);
+                    extractor.ExtractFile(pathExract, stream);
+                    
                 }
                 
             }

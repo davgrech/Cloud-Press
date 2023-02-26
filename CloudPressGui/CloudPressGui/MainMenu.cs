@@ -11,7 +11,7 @@ using System.Windows.Forms;
 using System.Diagnostics; // for process execution
 
 using SevenZip;
-
+using System.Collections.ObjectModel;
 
 namespace CloudPressGui
 {
@@ -23,10 +23,9 @@ namespace CloudPressGui
         //globals to navigate
         const string STARTERPOSITION = @"C:\Users\user\";
         string CURRENT_PATH = STARTERPOSITION + @"Desktop";
-        string SELECTED_PATH;
-
-        string PATH_OF_ARCHIVE;
-
+        string SELECTED_PATH = "";
+        string PATH_OF_ARCHIVE = "";
+        string RELATIVE_ROOT_ARCHIVE = "";
         bool IS_IN_ARCHIVE_MODE = false;
 
         public MainMenu(string PATH)
@@ -271,21 +270,40 @@ namespace CloudPressGui
 
 
                 }
+            
+               
             }
             else
             {
+                //if in archive mode
                 if(IS_IN_ARCHIVE_MODE)
                 {
-                    ArchiveCreator.decompressFileAndOpen(pathOfSelected, PATH_OF_ARCHIVE);
+
+                    //if its directory add to relative path of archive the parent directory
+                    if(Directory.Exists(pathOfSelected))
+                    {
+                        RELATIVE_ROOT_ARCHIVE = Path.Combine(RELATIVE_ROOT_ARCHIVE, fileSelectedName);
+                        directoryDoubleClick(pathOfSelected);
+                    }
+                    //else its a file and we cna open it with the relative path
+                    else
+                    {
+                        RELATIVE_ROOT_ARCHIVE = Path.Combine(RELATIVE_ROOT_ARCHIVE, fileSelectedName);
+                        ArchiveCreator.decompressFileAndOpen(RELATIVE_ROOT_ARCHIVE, PATH_OF_ARCHIVE);
+
+                        //after we open a file we are back to the relative root archive
+                        RELATIVE_ROOT_ARCHIVE = Path.GetDirectoryName(RELATIVE_ROOT_ARCHIVE);
+                    }
+                    
+                   
+                    
                 }
                 else
                 {
                     if (Directory.Exists(pathOfSelected))
                     {
 
-                        CURRENT_PATH = pathOfSelected;
-                        txtCurrentPath.Text = CURRENT_PATH;
-                        refreshListView(CURRENT_PATH);
+                        directoryDoubleClick(pathOfSelected);
 
                     }
                     else
@@ -309,33 +327,61 @@ namespace CloudPressGui
             }
 
         }
+        private void directoryDoubleClick(string path)
+        {
+            CURRENT_PATH = path;
+            txtCurrentPath.Text = CURRENT_PATH;
+            refreshListView(CURRENT_PATH);
+        }
        
         private void putArchiveFilesToListView(SevenZipExtractor extractor)
         {
             listView1.Items.Clear(); //delete all the items from listview
             for (int i = 0; i < extractor.ArchiveFileData.Count; i++)
             {
-              
-                if (Path.GetExtension(extractor.ArchiveFileData[i].FileName) == ".7z")
+               
+                if(extractor.ArchiveFileData[i].IsDirectory)
                 {
-                    editItemsListView(extractor.ArchiveFileData[i].FileName, extractor.ArchiveFileData[i].LastAccessTime.ToString(), (int)fileTypeMap.TypeMap.Zip);
-                    
-
-                }
-                else if (extractor.ArchiveFileData[i].IsDirectory)
-                {
-                    editItemsListView(extractor.ArchiveFileData[i].FileName, extractor.ArchiveFileData[i].LastAccessTime.ToString(), (int)fileTypeMap.TypeMap.Folder);
+                    if(!isChildPath(extractor.ArchiveFileNames, extractor.ArchiveFileData[i].FileName))
+                        editItemsListView(extractor.ArchiveFileData[i].FileName, extractor.ArchiveFileData[i].LastAccessTime.ToString(), (int)fileTypeMap.TypeMap.Folder);
                 }
                 else
                 {
-                    editItemsListView(extractor.ArchiveFileData[i].FileName, extractor.ArchiveFileData[i].LastAccessTime.ToString(), (int)fileTypeMap.TypeMap.File);
+                    if(Path.GetDirectoryName(extractor.ArchiveFileData[i].FileName) == "")
+                        editItemsListView(extractor.ArchiveFileData[i].FileName, extractor.ArchiveFileData[i].LastAccessTime.ToString(), (int)fileTypeMap.TypeMap.File);
                 }
+
+                
+
+
+
+      
 
 
             }
-            
-           
+
+
+}
+
+      
+
+        private bool isChildPath(ReadOnlyCollection<string> paths, string target)
+        {
+            bool isChild = false;
+
+            string parentDirectory = Path.GetDirectoryName(target);
+
+            foreach (string otherPath in paths)
+            {
+                if (otherPath != target && parentDirectory == otherPath)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
+
         /*
          * type map
          * 0. folder
@@ -422,14 +468,44 @@ namespace CloudPressGui
         {
             if(IS_IN_ARCHIVE_MODE)
             {
-                IS_IN_ARCHIVE_MODE = false;
-                refreshListView(CURRENT_PATH);
+                //if no relative directory
+                if (RELATIVE_ROOT_ARCHIVE == "")
+                {
+                    IS_IN_ARCHIVE_MODE = false;
+                    refreshListView(CURRENT_PATH);
+
+
+                }
+                else
+                {
+                    RELATIVE_ROOT_ARCHIVE = Path.GetDirectoryName(RELATIVE_ROOT_ARCHIVE);
+                    CURRENT_PATH = Path.GetDirectoryName(CURRENT_PATH);
+                    txtCurrentPath.Text = CURRENT_PATH;
+                    if(RELATIVE_ROOT_ARCHIVE == "")
+                    {
+                        //after i go back from a dictionary in zip i need to display the zip again
+                        using (SevenZipExtractor extractor = new SevenZipExtractor(PATH_OF_ARCHIVE))
+                        {
+
+                            putArchiveFilesToListView(extractor);
+
+
+                        }
+                    }
+                    else
+                    {
+                        refreshListView(CURRENT_PATH);
+                    }
+                    
+                }
+                
                 return;
             }
                
             
 
             DirectoryInfo parentDirectory = Directory.GetParent(CURRENT_PATH);
+            //check if we reached the start position if not
             if(!parentDirectory.FullName.Equals(STARTERPOSITION.Substring(0, STARTERPOSITION.Length-1)))
             {
                 CURRENT_PATH = parentDirectory.FullName;
