@@ -1,9 +1,9 @@
 // MathLibrary.cpp : Defines the exported functions for the DLL.
-#include "pch.h" // use stdafx.h in Visual Studio 2017 and earlier
+
 #include <utility>
 #include <limits.h>
 #include "compressor.h"
-
+#include "EncryptionHandler.h"
 
 #define _CRT_SECURE_NO_WARNINGS
 
@@ -341,4 +341,13 @@ void DecodeLZSS(char* inFilePath, char* outFilePath)
     printf("done!");
     fclose(inFile);
     fclose(outFile);
+}
+
+bool Decrypt(char* inFilePath, char* outFilePath, char* password)
+{
+    return decryptFile(inFilePath, outFilePath, password);
+}
+void Encrypt(char* inFilePath, char* outFilePath, char* password)
+{
+    return encryptFile(inFilePath, outFilePath, password);
 }

@@ -24,3 +24,5 @@
 // This function must be called before any other function.
 extern "C" COMPRESS_API void EncodeLZSS(char* inFilePath, char* outFilePath);
 extern "C" COMPRESS_API void DecodeLZSS(char* inFilePath, char* outFilePath);   /* decoding routine */
+extern "C" COMPRESS_API bool Decrypt(char* inFilePath, char* outFilePath, char* password);
+extern "C" COMPRESS_API void Encrypt(char* inFilePath, char* outFilePath, char* password);

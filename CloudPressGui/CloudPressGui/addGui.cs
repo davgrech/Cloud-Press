@@ -14,7 +14,7 @@ using SharpCompress.Archives.Rar;
 using SevenZip;
 using static System.Net.WebRequestMethods;
 using SharpCompress.Archives.SevenZip;
-
+using Microsoft.VisualBasic;
 namespace CloudPressGui
 {
   
@@ -29,8 +29,8 @@ namespace CloudPressGui
         [DllImport(@"dll_compression_decompression.dll", CallingConvention =  CallingConvention.Cdecl)]
         static extern void EncodeLZSS(string inFilePath, string outFilePath);
 
-        static string ARCHIVE_PATH;  
-     
+        static string ARCHIVE_PATH;
+    
 
         public addGui(List<string> paths, string archive)
         {
@@ -41,6 +41,8 @@ namespace CloudPressGui
            //init global variables
             PATHS_TO_COMPRESS = paths;
             ARCHIVE_PATH = archive;
+            
+
             if (paths == null) Application.Exit();
             if (PATHS_TO_COMPRESS.Count > 0)
             {
@@ -106,16 +108,7 @@ namespace CloudPressGui
 
 
 
-            //algorithm --->
-
-            //create 7zip file
-        
             
-           
-
-            // compress the files 
-
-            //SevenZipExtractor.SetLibraryPath(@"7z.dll");
 
                 
 
@@ -135,6 +128,15 @@ namespace CloudPressGui
         private void addGui_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void EncryptButton_Click(object sender, EventArgs e)
+        {
+           
+            PasswordForm testDialog = new PasswordForm(txtArchiveName.Text, PATHS_TO_COMPRESS);
+            testDialog.ShowDialog();
+            
+            
         }
     }
 }

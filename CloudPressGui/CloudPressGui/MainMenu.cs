@@ -33,7 +33,7 @@ namespace CloudPressGui
             InitializeComponent();
             SELECTED_PATH = PATH;
            
-            this.treeView1.NodeMouseClick += new TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseClick);
+            
 
             txtCurrentPath.Text = CURRENT_PATH;
 
@@ -55,20 +55,7 @@ namespace CloudPressGui
 
 
 
-        private void PopulateTreeView()
-        {
-            TreeNode rootNode;
-
-            //DirectoryInfo info = new DirectoryInfo(SELECTED_PATH);
-            DirectoryInfo info = new DirectoryInfo(CURRENT_PATH);
-            if (info.Exists)
-            {
-                rootNode = new TreeNode(info.Name);
-                rootNode.Tag = info;
-                GetDirectories(info.GetDirectories(), rootNode);
-                treeView1.Nodes.Add(rootNode);
-            }
-        }
+        
 
         private void GetDirectories(DirectoryInfo[] subDirs,
             TreeNode nodeToAddTo)
@@ -91,43 +78,7 @@ namespace CloudPressGui
         
 
 
-        void treeView1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
-        {
-            TreeNode newSelected = e.Node;
-            listView1.Items.Clear();
-            DirectoryInfo nodeDirInfo = (DirectoryInfo)newSelected.Tag;
-            ListViewItem.ListViewSubItem[] subItems;
-            ListViewItem item = null;
-
-            CURRENT_PATH = STARTERPOSITION + @"Desktop";
-           
-            IS_IN_ARCHIVE_MODE = false;
-
-            foreach (DirectoryInfo dir in nodeDirInfo.GetDirectories())
-            {
-
-                editItemsListView(dir.Name, dir.LastAccessTime.ToString(), (int)fileTypeMap.TypeMap.Folder);
-            }
-            foreach (FileInfo file in nodeDirInfo.GetFiles())
-            {
-                if (file.Name.EndsWith(".7z"))
-                {
-                    editItemsListView(file.Name, file.LastAccessTime.ToString(), (int)fileTypeMap.TypeMap.Zip);
-                    
-                }
-                else
-                {
-
-                    editItemsListView(file.Name, file.LastAccessTime.ToString(), (int)fileTypeMap.TypeMap.File);
-
-                }
-
-
-            }
-
-            
-        }
-
+        
 
         /*
          * multy select function.

@@ -18,11 +18,20 @@ namespace CloudPressGui
        
         static string TEMP_FOLDER_OF_PROJECT = Path.Combine(Environment.CurrentDirectory, "temp");
         static string VIEW_FOLDER_OF_PROJECT = Path.Combine(Environment.CurrentDirectory, "view");
+
         [DllImport(@"dll_compression_decompression.dll", CallingConvention = CallingConvention.Cdecl)]
         static extern void EncodeLZSS(string inFilePath, string outFilePath);
 
         [DllImport(@"dll_compression_decompression.dll", CallingConvention = CallingConvention.Cdecl)]
         static extern void DecodeLZSS(string inFilePath, string outFilePath);
+
+
+        //decrypt encrpyt
+        [DllImport(@"dll_compression_decompression.dll", CallingConvention = CallingConvention.Cdecl)]
+        static extern bool Decrpyt(string input_path, string out_path, string password);
+
+        [DllImport(@"dll_compression_decompression.dll", CallingConvention = CallingConvention.Cdecl)]
+        static extern void Encrypt(string input_path, string out_path, string password);
 
         public static void ZipFiles(string[] filePaths, string outputFilePath, string password = null)
         {
@@ -33,16 +42,20 @@ namespace CloudPressGui
             
             
         }
-        public static void ZipDirectory(string DirectroryPath, string outputFilePath)
+        public static void ZipDirectory(string DirectroryPath, string outputFilePath, string password = null)
         {
             var tmp = new SevenZipCompressor();
             tmp.CompressionLevel = CompressionLevel.None;
             tmp.ScanOnlyWritable = true;
+            
+          
             tmp.CompressDirectory(DirectroryPath, outputFilePath);
+           
         }
 
-        public static void createArchive(string pathOfArchive, List<string> pathsToEncode)
+        public static void createArchive(string pathOfArchive, List<string> pathsToEncode, string password = null)
         {
+
 
             //create temp folder
             createDirectory(TEMP_FOLDER_OF_PROJECT);
@@ -52,7 +65,7 @@ namespace CloudPressGui
 
             foreach (string path in pathsToEncode)
             {
-                
+
                 //if directory
                 if (Directory.Exists(path))
                 {
@@ -61,6 +74,9 @@ namespace CloudPressGui
                     string[] fileEntries = Directory.GetFiles(path, "*", SearchOption.AllDirectories); //search in all directories
                     foreach (string fileEntry in fileEntries)
                     {
+                        //encrypt if password set
+                        EncryptArchive(fileEntry, password);
+
                         string relativePath = GetRelativePath(Path.GetDirectoryName(path), fileEntry);
                         string parentDirectory = Path.GetDirectoryName(relativePath);  // relative directory 
                         tempOutputPath = Path.Combine(TEMP_FOLDER_OF_PROJECT, parentDirectory, Path.GetFileName(fileEntry)); // to compress directories
@@ -73,31 +89,36 @@ namespace CloudPressGui
                 }
                 else
                 {
+                    //encrypt if password set
+                    EncryptArchive(path, password);
+
                     tempOutputPath = Path.Combine(TEMP_FOLDER_OF_PROJECT, Path.GetFileName(path));
                     EncodeLZSS(path, tempOutputPath);
                     ZipFiles(Directory.GetFiles(TEMP_FOLDER_OF_PROJECT), pathOfArchive); // get the files from temp folder and add it to archive 
                 }
-                
-            
 
-               
-              
+
+
+
+
+
             }
 
             //after finish the temp folder
             //
-            
-           
 
 
-     
-      
-           
+
+
+
+
+
 
 
 
             //delete the temp folder after archive created successfully
             deleteDirectory(TEMP_FOLDER_OF_PROJECT);
+
 
 
 
@@ -129,10 +150,27 @@ namespace CloudPressGui
 
             return relativePath.Replace('/', Path.DirectorySeparatorChar);
         }
+
+
         public static void extractArchive(string pathOfArchive, string destination)
         {
             ExtractFile(pathOfArchive, destination);
 
+        }
+        public static bool EncryptArchive(string pathToEncrypt, string password = null)
+        {
+           
+            if(password == null)
+            {
+                return false;
+            }
+            string tempFile = Path.Combine(Path.GetTempPath(), Path.GetTempFileName());
+            Encrypt(pathToEncrypt, tempFile, password);
+            File.Replace(tempFile, pathToEncrypt, Path.Combine(Path.GetTempPath(), Path.GetTempFileName()));
+
+
+           
+            return true;
         }
 
         private static void ExtractFile(string archivePath, string destinationPath)
@@ -142,16 +180,14 @@ namespace CloudPressGui
             //dolev/dolev
            
             SevenZipExtractor extractor = new SevenZipExtractor(archivePath);
-
             extractor.ExtractArchive(destinationPath);
+      
+            
 
             foreach(var file in extractor.ArchiveFileData)
             {
                 string fullpath = Path.Combine(destinationPath, file.FileName);
-                //if (File.Exists(fullpath))
-                //{
-                //    MessageBox.Show("Are you sure?", "dummy", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                //}
+             
 
                 if (!Directory.Exists(fullpath))
                 {
