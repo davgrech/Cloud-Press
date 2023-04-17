@@ -74,14 +74,17 @@ namespace CloudPressGui
                     string[] fileEntries = Directory.GetFiles(path, "*", SearchOption.AllDirectories); //search in all directories
                     foreach (string fileEntry in fileEntries)
                     {
-                        //encrypt if password set
-                        EncryptArchive(fileEntry, password);
+                        
 
                         string relativePath = GetRelativePath(Path.GetDirectoryName(path), fileEntry);
                         string parentDirectory = Path.GetDirectoryName(relativePath);  // relative directory 
                         tempOutputPath = Path.Combine(TEMP_FOLDER_OF_PROJECT, parentDirectory, Path.GetFileName(fileEntry)); // to compress directories
                         createDirectory(Path.Combine(TEMP_FOLDER_OF_PROJECT, parentDirectory));
+
+                        //compress
                         EncodeLZSS(fileEntry, tempOutputPath);
+                        //encrypt if password set
+                        EncryptArchive(tempOutputPath, password);
 
                         ZipDirectory(TEMP_FOLDER_OF_PROJECT, pathOfArchive);
                     }
@@ -89,11 +92,14 @@ namespace CloudPressGui
                 }
                 else
                 {
-                    //encrypt if password set
-                    EncryptArchive(path, password);
+                    
 
                     tempOutputPath = Path.Combine(TEMP_FOLDER_OF_PROJECT, Path.GetFileName(path));
+                    //compress
                     EncodeLZSS(path, tempOutputPath);
+                    //encrypt if password set
+                    EncryptArchive(tempOutputPath, password);
+
                     ZipFiles(Directory.GetFiles(TEMP_FOLDER_OF_PROJECT), pathOfArchive); // get the files from temp folder and add it to archive 
                 }
 
@@ -165,19 +171,36 @@ namespace CloudPressGui
                 return false;
             }
             string tempFile = Path.Combine(Path.GetTempPath(), Path.GetTempFileName());
-            Encrypt(pathToEncrypt, tempFile, password);
+            Encrypt(pathToEncrypt, "C:\\Users\\user\\Desktop\\lmdasd.txt", password);
+            
             File.Replace(tempFile, pathToEncrypt, Path.Combine(Path.GetTempPath(), Path.GetTempFileName()));
 
+            //add the encrypt flag
+            addEncryptedAttribute(pathToEncrypt);
 
-           
+
+
             return true;
         }
-
-        private static void ExtractFile(string archivePath, string destinationPath)
+        private static void addEncryptedAttribute(string filePath)
         {
-            createDirectory(TEMP_FOLDER_OF_PROJECT);
-
-            //dolev/dolev
+            FileAttributes attributes  = File.GetAttributes(filePath);
+            if ((attributes & FileAttributes.Encrypted) != FileAttributes.Encrypted)
+            {
+                attributes |= FileAttributes.Encrypted; 
+                File.SetAttributes(filePath, attributes);
+                MessageBox.Show("The encrypted flag has been added", "!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("The encrypted flag is already raised", "!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+        private static void ExtractFile(string archivePath, string destinationPath, string password = null)
+        {
+            string tempPath;
+            
+          
            
             SevenZipExtractor extractor = new SevenZipExtractor(archivePath);
             extractor.ExtractArchive(destinationPath);
@@ -193,8 +216,16 @@ namespace CloudPressGui
                 {
                     
                     //decoded file here
-                    string tempPath = Path.Combine(Path.GetTempPath(), Path.GetTempFileName());
+                    tempPath = generateTempPath();
 
+                    //decrypt
+                    Decrpyt(fullpath, tempPath, password);
+
+                    CopyFile(tempPath, fullpath);
+
+
+
+                    tempPath = generateTempPath();
                     //original content in fullpath
                     DecodeLZSS(fullpath, tempPath);
 
@@ -204,23 +235,12 @@ namespace CloudPressGui
                     CopyFile(tempPath, fullpath);
 
                 }
-
-
-
-                
-             
-
-                 
-
-               
-
-
-
             }
-
-
-            deleteDirectory(TEMP_FOLDER_OF_PROJECT);
-
+        
+        }
+        private static string generateTempPath()
+        {
+            return Path.Combine(Path.GetTempPath(), Path.GetTempFileName());
         }
         private static void CopyFile(string sourceFile, string destinationFile)
         {
@@ -262,16 +282,55 @@ namespace CloudPressGui
 
             //putting the decoded file in view so ppl can process it
             DecodeLZSS(tempOutputPath, viewFile);
-            try
+
+
+            FileAttributes attributes = File.GetAttributes(viewFile);
+            if ((attributes & FileAttributes.Encrypted) == FileAttributes.Encrypted)
             {
-                Process process = new Process();
-                process.StartInfo.FileName = viewFile;
-                process.EnableRaisingEvents = true;
-                process.Exited += Process_Exited;
-                process.Start();
-            }catch (Exception ex)
+                //dialog to ask for password
+                string password = "ask";
+ 
+                string tempFile = Path.Combine(Path.GetTempPath(), Path.GetTempPath());
+                //check if the password is the currect
+                if(ArchiveCreator.Decrpyt(viewFile, tempFile, password))
+                {
+                    //put in view file the decrypted file
+                    File.Replace(tempFile, viewFile, Path.Combine(Path.GetTempPath(), Path.GetTempPath()));
+                    try
+                    {
+                        Process process = new Process();
+                        process.StartInfo.FileName = viewFile;
+                        process.EnableRaisingEvents = true;
+                        process.Exited += Process_Exited;
+                        process.Start();
+                    }
+                    catch (Exception ex)
+                    {
+
+                    }
+                }
+                else
+                {
+                    //password is worng
+                    MessageBox.Show("error occurred", "passwords is wrong", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
+            }
+            else
             {
-                
+                //run the process without ddecryption
+                try
+                {
+                    Process process = new Process();
+                    process.StartInfo.FileName = viewFile;
+                    process.EnableRaisingEvents = true;
+                    process.Exited += Process_Exited;
+                    process.Start();
+                }
+                catch (Exception ex)
+                {
+
+                }
             }
 
             

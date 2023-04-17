@@ -37,10 +37,24 @@ namespace CloudPressGui
 
             txtCurrentPath.Text = CURRENT_PATH;
 
+
+
+
             refreshListView(CURRENT_PATH);
+
+
+            
+            
+            
             
         }
         
+
+        private void EventHandler(object sender, EventArgs e)
+        {
+            refreshListView(CURRENT_PATH);
+        }
+
         private void browserBtn_Click(object sender, EventArgs e)
         {
 
@@ -116,7 +130,7 @@ namespace CloudPressGui
             if (listView1.SelectedItems.Count > 0)
             {
                 //string path = listView1.SelectedItems[0].SubItems[0].Text;
-                TreeNode selectedNode = treeView1.SelectedNode;
+             
                 //string path = selectedNode.FullPath;
                 // MessageBox.Show("test", "hello",MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -147,8 +161,13 @@ namespace CloudPressGui
             this.ControlBox = false;
 
 
-            addWindows.Show();
-            
+            addWindows.ShowDialog();
+
+            refreshListView(CURRENT_PATH);
+
+
+
+
 
         }
 
@@ -489,6 +508,24 @@ namespace CloudPressGui
         private void btnBrowse_Click(object sender, EventArgs e)
         {
             refreshListView(CURRENT_PATH);
+        }
+
+        private void removeButton_Click(object sender, EventArgs e)
+        {
+            List<string> paths_to_delete = getPathsToArchiveFromGui();
+            foreach(string path in paths_to_delete)
+            {
+                if (Directory.Exists(path))
+                {
+                    Directory.Delete(path);
+                }
+                else
+                {
+                    File.Delete(path);
+                }
+                refreshListView(CURRENT_PATH);
+            }
+            
         }
     }
     

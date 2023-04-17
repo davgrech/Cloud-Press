@@ -134,7 +134,8 @@ namespace CloudPressGui
         {
            
             PasswordForm testDialog = new PasswordForm(txtArchiveName.Text, PATHS_TO_COMPRESS);
-            testDialog.ShowDialog();
+            testDialog.Show();
+
             
             
         }
