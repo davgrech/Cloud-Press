@@ -92,6 +92,18 @@
   <ItemGroup>
     <Content Include="NativeMethods.h" />
     <Compile Include="ArchiveCreator.cs" />
+    <Compile Include="AzureService\Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AzureService\Login.Designer.cs">
+      <DependentUpon>Login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AzureService\register.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AzureService\register.Designer.cs">
+      <DependentUpon>register.cs</DependentUpon>
+    </Compile>
     <Compile Include="extractGui.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -121,6 +133,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="addGui.resx">
       <DependentUpon>addGui.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AzureService\Login.resx">
+      <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AzureService\register.resx">
+      <DependentUpon>register.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="extractGui.resx">
       <DependentUpon>extractGui.cs</DependentUpon>

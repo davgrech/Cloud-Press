@@ -147,7 +147,7 @@ namespace CloudPressGui
 
 
             //archive
-            PATH_OF_ARCHIVE = CURRENT_PATH;
+            
 
             List<string> listOfPaths = getPathsToArchiveFromGui();
 
@@ -179,6 +179,7 @@ namespace CloudPressGui
 
         private List<string> getPathsToArchiveFromGui()
         {
+            PATH_OF_ARCHIVE = CURRENT_PATH;
             List<string> paths = new List<string>();
 
             //"C:\Users\user\Desktop\CodeBlocks.rar"
@@ -521,7 +522,10 @@ namespace CloudPressGui
                 }
                 else
                 {
+
                     File.Delete(path);
+                  
+
                 }
                 refreshListView(CURRENT_PATH);
             }
