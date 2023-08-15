@@ -1,0 +1,13 @@
+C:\Users\user\Desktop\Dolev\magshimimProjects\Projects_2022\ashkelon-1206-compressor\CloudPressGui\CloudPressGui\bin\Release\CloudPressGui.exe.config
+C:\Users\user\Desktop\Dolev\magshimimProjects\Projects_2022\ashkelon-1206-compressor\CloudPressGui\CloudPressGui\bin\Release\CloudPressGui.exe
+C:\Users\user\Desktop\Dolev\magshimimProjects\Projects_2022\ashkelon-1206-compressor\CloudPressGui\CloudPressGui\bin\Release\CloudPressGui.pdb
+C:\Users\user\Desktop\Dolev\magshimimProjects\Projects_2022\ashkelon-1206-compressor\CloudPressGui\CloudPressGui\obj\Release\CloudPressGui.csproj.AssemblyReference.cache
+C:\Users\user\Desktop\Dolev\magshimimProjects\Projects_2022\ashkelon-1206-compressor\CloudPressGui\CloudPressGui\obj\Release\CloudPressGui.csproj.SuggestedBindingRedirects.cache
+C:\Users\user\Desktop\Dolev\magshimimProjects\Projects_2022\ashkelon-1206-compressor\CloudPressGui\CloudPressGui\obj\Release\CloudPressGui.addGui.resources
+C:\Users\user\Desktop\Dolev\magshimimProjects\Projects_2022\ashkelon-1206-compressor\CloudPressGui\CloudPressGui\obj\Release\CloudPressGui.extractGui.resources
+C:\Users\user\Desktop\Dolev\magshimimProjects\Projects_2022\ashkelon-1206-compressor\CloudPressGui\CloudPressGui\obj\Release\CloudPressGui.MainMenu.resources
+C:\Users\user\Desktop\Dolev\magshimimProjects\Projects_2022\ashkelon-1206-compressor\CloudPressGui\CloudPressGui\obj\Release\CloudPressGui.Properties.Resources.resources
+C:\Users\user\Desktop\Dolev\magshimimProjects\Projects_2022\ashkelon-1206-compressor\CloudPressGui\CloudPressGui\obj\Release\CloudPressGui.csproj.GenerateResource.cache
+C:\Users\user\Desktop\Dolev\magshimimProjects\Projects_2022\ashkelon-1206-compressor\CloudPressGui\CloudPressGui\obj\Release\CloudPressGui.csproj.CoreCompileInputs.cache
+C:\Users\user\Desktop\Dolev\magshimimProjects\Projects_2022\ashkelon-1206-compressor\CloudPressGui\CloudPressGui\obj\Release\CloudPressGui.exe
+C:\Users\user\Desktop\Dolev\magshimimProjects\Projects_2022\ashkelon-1206-compressor\CloudPressGui\CloudPressGui\obj\Release\CloudPressGui.pdb

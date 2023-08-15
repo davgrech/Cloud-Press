@@ -1,0 +1,11 @@
+﻿  compressor.cpp
+C:\Users\user\Desktop\Dolev\magshimimProjects\Projects_2022\ashkelon-1206-compressor\dll_compression_decompression\dll_compression_decompression\compressor.cpp(91,6): warning C4273: 'EncodeLZSS': inconsistent dll linkage
+C:\Users\user\Desktop\Dolev\magshimimProjects\Projects_2022\ashkelon-1206-compressor\dll_compression_decompression\dll_compression_decompression\compressor.h(25,30): message : see previous definition of 'EncodeLZSS'
+C:\Users\user\Desktop\Dolev\magshimimProjects\Projects_2022\ashkelon-1206-compressor\dll_compression_decompression\dll_compression_decompression\compressor.cpp(112,22): warning C4101: 'code': unreferenced local variable
+C:\Users\user\Desktop\Dolev\magshimimProjects\Projects_2022\ashkelon-1206-compressor\dll_compression_decompression\dll_compression_decompression\compressor.cpp(240,6): warning C4273: 'DecodeLZSS': inconsistent dll linkage
+C:\Users\user\Desktop\Dolev\magshimimProjects\Projects_2022\ashkelon-1206-compressor\dll_compression_decompression\dll_compression_decompression\compressor.h(26,30): message : see previous definition of 'DecodeLZSS'
+C:\Users\user\Desktop\Dolev\magshimimProjects\Projects_2022\ashkelon-1206-compressor\dll_compression_decompression\dll_compression_decompression\compressor.cpp(346,6): warning C4273: 'Decrypt': inconsistent dll linkage
+C:\Users\user\Desktop\Dolev\magshimimProjects\Projects_2022\ashkelon-1206-compressor\dll_compression_decompression\dll_compression_decompression\compressor.h(27,30): message : see previous definition of 'Decrypt'
+C:\Users\user\Desktop\Dolev\magshimimProjects\Projects_2022\ashkelon-1206-compressor\dll_compression_decompression\dll_compression_decompression\compressor.cpp(350,6): warning C4273: 'Encrypt': inconsistent dll linkage
+C:\Users\user\Desktop\Dolev\magshimimProjects\Projects_2022\ashkelon-1206-compressor\dll_compression_decompression\dll_compression_decompression\compressor.h(28,30): message : see previous definition of 'Encrypt'
+  dll_compression_decompression.vcxproj -> C:\Users\user\Desktop\Dolev\magshimimProjects\Projects_2022\ashkelon-1206-compressor\dll_compression_decompression\x64\Debug\dll_compression_decompression.dll
